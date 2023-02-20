@@ -1,0 +1,79 @@
+
+*{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    background-color: #24252a; 
+    
+  }
+  
+  li, a, button{
+      font-family: 'Times New Roman', Times, serif;
+      font-weight: 500;
+      font-size: 16px;
+      color:#fbfcfd;
+      text-decoration: none;
+  }
+  
+  header{
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 30px 10%;
+  }
+  
+  .nav__links {
+      list-style: none;
+  }
+  
+  .nav__links li{
+      display: inline-block;
+      padding: 0px 20px;
+  }
+  
+  .nav__links li a{
+      transition: all 0.3s ease 0s;
+  
+  }
+  
+  .nav__links li a:hover{
+      color: #0088a9
+  
+  }
+
+  button{
+        color: rgba(0, 136,168,169,1);
+        padding: 10px 25px;
+        background: transparent;
+        border: 1px solid #fff;
+        border-radius: 20px;
+        outline: none;
+        cursor: pointer; 
+        transition: all 0.3s ease 0s;
+  }
+
+  button:hover{
+    background-color:#0088a9 ;
+  }
+
+  /* стилистика для панели навигации */
+
+  .container{
+    width: 100;
+    height: 100vh;
+    background-image: url(Images/homebg.jpeg);
+    background-position: center;
+    background-size: cover;
+  } */
+
+.row{
+   display: flex;
+   height: 88%;
+   align-items: center; 
+}
+
+
+h1{
+    color:black;
+    font-size: 100px;
+}
