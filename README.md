@@ -7,11 +7,11 @@
 
 ## Team
 
-*Illia Shynkaruk
+*Illia Shynkaruk -ilshyn
 
-*Arina Rybakova (Home page and Sign in form +navigation bar & footer)
+*Arina Rybakova -arroba (Home page and Sign in form +navigation bar & footer)
 
-*Ilja Treiberg
+*Ilja Treiberg - iltrei
 
 
 ## Goals, Objectives and Phases
