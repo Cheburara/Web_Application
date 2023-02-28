@@ -7,8 +7,10 @@
 
 ## Team
 
-*Illia Shynkaruk
+Illia Shynkaruk
+
 *Arina Rybakova (Home page and Sign in form +navigation bar & footer)
+
 *Ilja Treiberg
 
 
@@ -17,6 +19,7 @@
 ### Objective
 
 *Defence of Team Project
+
 *Create an operating Web-Application
 
 ### Goals
