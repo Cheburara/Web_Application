@@ -7,7 +7,7 @@
 
 ## Team
 
-Illia Shynkaruk
+*Illia Shynkaruk
 
 *Arina Rybakova (Home page and Sign in form +navigation bar & footer)
 
