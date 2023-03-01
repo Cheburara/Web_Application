@@ -1,6 +1,6 @@
 # SPECIFICATION FOR A WEBSITE
 
-Links
+Links: https://enos.itcollege.ee/~iltrei/milestone1.3/Page%20Home/home.html
 
 ## On-demand garbage collection
 
