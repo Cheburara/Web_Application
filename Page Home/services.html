@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+ <html>
+  <head>
+  	<meta charset="utf-8">
+  	<link rel="stylesheet" href="services.css">
+  	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css"  /> 
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Questrial&family=Work+Sans&display=swap" rel="stylesheet">
+        <title>Services</title>
+</head>
+  <body>
+  	<header>
+  		<img class="logo" src="Images/logoR.png" alt="logo" width="100px" height="100px">
+            <nav>
+                <ul class="nav__links">
+                    <li><a href="home.html">HOME</a></li>
+                    <li><a href="services.html">SERVICES</a></li>
+                    <li><a href="locations.html">LOCATIONS</a></li>
+                    <li><a href="my_profile.html">MY PROFILE</a></li>  
+                    <div class="dropdown">
+                        <button class="dropbtn">ABOUT US</button>
+                        <div class="dropdown-content">
+                            <a href="team.html">TEAM</a>
+                            <a href="history.html">HISTORY</a>
+                        </div>
+                    </div>    
+                </ul>
+            </nav>
+            <a class="cta" href="form.html"><button>Sign</button></a>
+  	</header>
+  	 <div class="container">
+            <div class="overlay">
+            <div id="request">    
+                <h1><i>Garbage collection request</i></h1><br>
+                <form action="submit-form.php">
+                <label for="time"><font size="+1">Time of service</font></label><br>
+                <select id="time" name="Day" class="time">
+          <option value="Mondey">Monday</option>
+          <option value="Tuesday">Tuesday</option>
+          <option value="Friday">Friday</option>
+        </select><br>
+                <select id="time" name="time" class="time2">
+          <option value="morning">8 - 12 a.m</option>
+          <option value="afternoon">12-16 p.m</option>
+          <option value="evening">16-19 p.m</option>
+        </select><br><br>
+        <label for="service"><font size="+1">Type of service</font></label><br>
+        <select id="service" name="service" class="service">
+          <option value="First op">Full cleaning</option>
+          <option value="Second op">Surface and ground cleaning(dust, rubbish)</option>
+          <option value="Third op">Collection of large-scale garbage</option>
+        </select><br><br>
+        <input type="checkbox" name="privacy-policy"><font size="+2">I agree with privacy policy</font><br>
+        
+            <input type ="Submit" value="Submit">
+               
+            </div>
+        </div>
+        </form>
+        <footer>
+            <div class="footer-content">
+                <h3>EcoClean</h3>
+                <p>Make a difference together</p>
+            </div>
+        </footer>
+    </body>
+</html>
