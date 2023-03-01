@@ -107,7 +107,7 @@ label {
    .container{
     width: 105;
     height: 132vh;
-    background-image: url(Images/istockphoto.jpg  );
+    background-image: url("..images/istockphoto.jpg");
     background-position: center;
     background-size: cover;
     background-repeat: no-repeat;
