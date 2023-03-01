@@ -2,11 +2,11 @@
  <html>
   <head>
   	<meta charset="utf-8">
-  	<link rel="stylesheet" href="styles2.css">
+  	<link rel="stylesheet" href="locations.css">
   	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css"  /> 
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link href="https://fonts.googleapis.com/css2?family=Questrial&family=Work+Sans&display=swap" rel="stylesheet">    
+        <link href="https://fonts.googleapis.com/css2?family=Questrial&family=Work+Sans&display=swap" rel="stylesheet">
         <title>Locations</title>
   </head>
   <body>
@@ -14,17 +14,30 @@
   		<img class="logo" src="Images/logoR.png" alt="logo" width="100px" height="100px">
             <nav>
                 <ul class="nav__links">
-                    <li><a href="home.html">HOME</li>
-                    <li><a href="#">SERVICES</li>
-                    <li><a href="#">COLLOBORATION</li> 
-                    <li><a href="#">LOCATIONS</li>  
-                    <li><a href="#">ABOUT US</li>     
+                    <li><a href="home.html">HOME</a></li>
+                    <li><a href="services.html">SERVICES</a></li>
+                    <li><a href="locations.html">LOCATIONS</a></li>
+                    <li><a href="my_profile.html">MY PROFILE</a></li>    
+                    <div class="dropdown">
+                        <button class="dropbtn">ABOUT US</button>
+                        <div class="dropdown-content">
+                            <a href="team.html">TEAM</a>
+                            <a href="history.html">HISTORY</a> 
+                        </div>
+                        </div>  
                 </ul>
             </nav>
+            <a class="cta" href="form.html"><button>Sign</button></a>
   	</header>
   	 <div class="container">
-            <div class="overlay">
-                <p>Areas where we provide our services: Tallinn city<br><b>1.KRISTIINE</b><br><b>2.MUSTAMÄE</b></h1><br><i>Private houses, cottages, yard area and garbage cans service</i></p>
+            <div class="overlay">    
+                <p>Areas where we provide our services: Tallinn city - <br></p>
+                <p><b>
+                    <a href="https://www.google.ee/maps/place/Kristiine,+Tallinn/@59.41386,24.6688162,13z/data=!3m1!4b1!4m6!3m5!1s0x469294f17b47fd7b:0x500b36d18fc7120!8m2!3d59.4164146!4d24.7100188!16s%2Fm%2F02r5t6_?hl=en" class="firstl">KRISTIINE</a></b><br></p>
+                    <p><b>
+                        
+                    <a href="https://www.google.ee/maps/place/Mustam%C3%A4e,+Tallinn/@59.4053159,24.6395594,13z/data=!3m1!4b1!4m6!3m5!1s0x469294559821082d:0x500b36d18fc7110!8m2!3d59.401031!4d24.6945077!16zL20vMGRoZjI3?hl=en" class="secondl">MUSTAMÄE</a></b><br>
+                    <i>Private houses, cottages, yard area and garbage cans service</i></p>
             </div>
             <div class="overlay2">
             	<p1>Also, our service covers planting areas, lawns in case of company contract</p1>
