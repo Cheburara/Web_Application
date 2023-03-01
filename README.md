@@ -7,11 +7,11 @@
 
 ## Team
 
-*Illia Shynkaruk -ilshyn
+*Illia Shynkaruk -ilshyn (Services and Locations pages)
 
 *Arina Rybakova -arroba (Home page and Sign in form +navigation bar & footer)
 
-*Ilja Treiberg - iltrei
+*Ilja Treiberg - iltrei (About us and profile pages)
 
 
 ## Goals, Objectives and Phases
@@ -39,22 +39,23 @@ Project deadline (finish): 14th study week
 
 ## Content Structure
 
-### Site map
+### Site map (sketch)
 
-HOME (sketch)
+HOME
   +--HOME
   |    +--Navigation bar
   |    +--Motto
   |    +--Contacts
   +--SERVICES
   |    +--SERVICE 1
-  |    +--SERVICE 2
   |    ...
   +--LOCATIONS
   |    +--Map
   |    +--
   +--ABOUT US
-  |    +--
+  |    +--Team 
+  |    +--History
+  +--Profile
   |    +--
   +--FORM
   |    +--Sign in
