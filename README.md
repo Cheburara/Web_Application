@@ -1,5 +1,7 @@
 # SPECIFICATION FOR A WEBSITE
 
+Links
+
 ## On-demand garbage collection
 
 * The main problem is to make the web-application to work
