@@ -5,13 +5,9 @@
     padding: 0;
     background-color: #24252a; 
     
-  }
-
-  body{
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
 }
+
+  
 
     
     .text {
@@ -183,4 +179,44 @@ footer{
     text-transform: uppercase;
     opacity: .4;
     font-weight: 200;
+}
+/* Стилистика для всплывающего меню */
+
+.dropbtn {
+    color: #ffffff;
+    padding: 16px;
+    font-size: 16px;
+    border: none;
+    
+}
+
+.dropdown {
+    position: relative  ; 
+    display: inline-block;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f1f1f100;
+    min-width: 100px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+}
+
+.dropdown-content a {
+    color: rgb(255, 255, 255);
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+.dropdown-content a:hover {color: #0088a9;}
+
+.dropdown:hover .dropdown-content {display: block;}
+
+.dropdown:hover .dropbtn {background-color: #00000000;}
+
+.dropbtn:hover {
+    color: #0088a9 ;
 }
