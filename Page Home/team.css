@@ -1,5 +1,4 @@
 
-
 *{
     box-sizing: border-box;
     margin: 0;
@@ -83,7 +82,7 @@ body {
     line-height: 1.5;
     color: white;
     background-color: #f5f5f5;
-    background-image: url(Images/teamm.jpg);
+    background-image: url("..images/teamm.jpg");
     }
     
     h1, h2, h3 {
