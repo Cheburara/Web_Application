@@ -48,7 +48,7 @@ if(isset($_POST['submit'])) {
             $_SESSION['loggedIn'] = true;
 
             // Redirect the user to the home page
-            header('Location: registration.html');
+            header('Location: my_profile.html');
             exit;
         }
     }
