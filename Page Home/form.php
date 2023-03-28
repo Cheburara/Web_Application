@@ -54,6 +54,6 @@ if(isset($_POST['submit'])) {
     }
 
     // If we get here, the login failed
-   echo "Invalid email or password";
+   echo "Invalid email or passwordd";
 }
 ?>
