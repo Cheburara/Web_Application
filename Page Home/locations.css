@@ -13,60 +13,7 @@
 
   /* стилистика для панели навигации */
 
-  li, a, button{
-      font-family: 'Work Sans', sans-serif;
-      font-weight: 500;
-      font-size: 16px;
-      color:#fbfcfd;
-      text-decoration: none;
-  }
-  .secondl:hover {
-  color: blue;
-}
-.firstl:hover {
-  color: blue;
-} 
-  header{
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 30px 10%;
-  }
-  
-  .nav__links {
-      list-style: none;
-  }
-  
-  .nav__links li{
-      display: inline-block;
-      padding: 0px 20px;
-  }
-  
-  .nav__links li a{
-      transition: all 0.3s ease 0s;
-  
-  }
-  
-  .nav__links li a:hover{
-      color: #0088a9
-  
-  }
-
-  button{
-        color: rgba(0, 136,168,169,1);
-        padding: 10px 25px;
-        background: transparent;
-        border: 1px solid #fff;
-        border-radius: 20px;
-        outline: none;
-        cursor: pointer; 
-        transition: all 0.3s ease 0s;
-  }
-
-  button:hover{
-    background-color:#0088a9 ;
-  }
-
+ 
   /* стилистика для основной части*/
    .container{
     width: 100;
