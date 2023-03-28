@@ -55,7 +55,7 @@ if(isset($_POST['submit'])) {
         fclose($fp);
 
         // Redirection to success
-        header('Location: thank_you.html');
+        header('Location: thanku.html');
         exit;
     }
 }
