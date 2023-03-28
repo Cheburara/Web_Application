@@ -1,9 +1,11 @@
+
+
 *{
     box-sizing: border-box;
     margin: 0;
     padding: 0;
-    background-color: #24252a; 
-    
+    background-color: #24252a;
+
   }
 
   body{
@@ -16,7 +18,7 @@ h1{
 }
 
 
-    
+
     .text {
       color: white;
       font-family: 'Questrial', sans-serif;
@@ -65,7 +67,7 @@ button{
       border: 1px solid #fff;
       border-radius: 20px;
       outline: none;
-      cursor: pointer; 
+      cursor: pointer;
       transition: all 0.3s ease 0s;
 }
 
@@ -81,25 +83,25 @@ button:hover{
         line-height: 1.5;
         color: white;
         background-color: #f5f5f5;
-        background-image: url("images/historybg.jpg");
+        background-image: url(Images/historybg.jpg);
         }
-    
+
     h1, h2, h3 {
     font-family: 'Questrial', sans-serif;
     font-weight: bold;
     text-align: center;
     }
-    
+
     h1 {
     font-size: 36px;
     margin-top: 10px;
     margin-bottom: 30px;
     }
-    
-    p {
-    margin-bottom: 20px;
+
+    info {
+    margin-bottom: 0px;
     }
-    
+
     .container {
     max-width: 960px;
     margin: 0 auto;
@@ -107,25 +109,121 @@ button:hover{
     box-sizing: border-box;
 
     }
-    
+
     .info {
     text-align: justify;
     margin-bottom: 100px;
     }
 
+
+.text {
+    color: white;
+    font-family: 'Questrial', sans-serif;
+}
+
+/* стилистика для панели навигации */
+
+li, a, button{
+    font-family: 'Work Sans', sans-serif;
+    font-weight: 500;
+    font-size: 16px;
+    color:#fbfcfd;
+    text-decoration: none;
+}
+
+header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 30px 10%;
+}
+
+.nav__links {
+    list-style: none;
+}
+
+.nav__links li{
+    display: inline-block;
+    padding: 0px 20px;
+}
+
+.nav__links li a{
+    transition: all 0.3s ease 0s;
+
+}
+
+.nav__links li a:hover{
+    color: #0088a9
+
+}
+
+button{
+    color: rgba(0, 136,168,169,1);
+    padding: 10px 25px;
+    background: transparent;
+    border: 1px solid #fff;
+    border-radius: 20px;
+    outline: none;
+    cursor: pointer;
+    transition: all 0.3s ease 0s;
+}
+
+button:hover{
+    background-color:#0088a9 ;
+}
+
+/* стилистика для основной части*/
+
+.container{
+    width: 100;
+    height: 80vh;
+    background-image: url("..images/homebg.jpeg");
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+.overflow{
+    display: flex;
+    height: 88%;
+    align-items: center;
+}
+
+.overlay {
+    position: absolute;
+    top: 55%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 15px;
+    background-color: rgba(0, 0, 0, 0.7);
+    color: #fff;
+    font-size: 24px;
+    font-weight: bold;
+    text-align: center;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
+}
+
+.overlay h1 {
+    color: #fff;
+    font-size: 60px;
+    font-family: 'Questrial', sans-serif;
+    font-family: 'Work Sans', sans-serif;
+}
+
 /* стилистика для панели футера */
 
 footer{
-    position: fixed;
+    position: relative;
     bottom: 0;
     left: 0;
     right: 0;
-    background: #000;/* Change 112*/
-    height: 9vw;
+    background: #111;
+    height: auto;
     width: 100vw;
     font-family: "Open Sans";
-    padding-top: 40px; /*Change*/
+    padding-top: 40px;
     color: #fff;
+
 }
 .footer-content{
     display: flex;
@@ -145,12 +243,51 @@ footer{
 .footer-content p{
     max-width: 500px;
     margin: 10px auto;
-    line-height: 8px;
+    line-height: 28px;
     font-size: 14px;
     font-family: 'Questrial', sans-serif;
     font-family: 'Work Sans', sans-serif;
 }
+.socials{
+    list-style: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 1rem 0 3rem 0;
+}
+.socials li{
+    margin: 0 10px;
+}
+.socials a{
+    text-decoration: none;
+    color: #fff;
+}
+.socials a i{
+    font-size: 1.1rem;
+    transition: color .4s ease;
 
+}
+.socials a:hover i{
+    color: #0088a9 ;
+}
+
+.footer-bottom{
+    background: #000;
+    width: 100vw;
+    padding: 20px 0;
+    text-align: center;
+}
+.footer-bottom p{
+    font-size: 14px;
+    word-spacing: 2px;
+    text-transform: capitalize;
+}
+.footer-bottom span{
+    text-transform: uppercase;
+    opacity: .4;
+    font-weight: 200;
+}
+/*
     /* Стилистика для всплывающего меню */
 
 .dropbtn {
@@ -158,11 +295,11 @@ footer{
     padding: 16px;
     font-size: 16px;
     border: none;
-    
+
 }
 
 .dropdown {
-    position: relative  ; 
+    position: relative  ;
     display: inline-block;
 }
 
