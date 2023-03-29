@@ -29,6 +29,21 @@
     margin-top: 20px;
   }
 
+.login {
+    position: absolute;
+    top: calc(50% + 120px);
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+  }
+  .login p a{
+    text-decoration: none;
+    color: #fff;
+    font-weight: 600;
+}
+.login p a:hover{
+    text-decoration: underline;
+}
 
 
 
