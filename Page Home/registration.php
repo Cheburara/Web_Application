@@ -54,6 +54,10 @@ if(isset($_POST['submit'])) {
         // close file
         fclose($fp);
 
+        $_SESSION['username'] = $username;
+        $_SESSION['email'] = $email;
+        $_SESSION['password'] = $password;
+
         // Redirection to success
         header('Location: thanku.html');
         exit;
