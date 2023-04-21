@@ -24,7 +24,7 @@
  <html lang="en">
   <head>
   	<meta charset="utf-8">
-  	<link rel="stylesheet" href="services2.css">
+  	<link rel="stylesheet" href="services.css">
   	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css"  /> 
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
