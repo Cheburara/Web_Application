@@ -1,5 +1,7 @@
 <?php
 session_start();
+$email = isset($_SESSION['email']) ? $_SESSION['email'] : '';
+$username = isset($_SESSION['username']) ? $_SESSION['username'] : '';
 ?>
 <!DOCTYPE html>
 <html>
@@ -39,7 +41,7 @@ session_start();
             <input type="hidden" name="session_id" value="<?php echo session_id(); ?>">
             <p>
                 <label>Email:</label>
-                <input type="text" name="email" id="email" value="<?php echo $_SESSION['email']; ?>" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" required/>
+                <input type="text" name="email" id="email" value="<?php echo $email; ?>" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" required/>
             </p>
             <p>
                 <label>Name:</label>
