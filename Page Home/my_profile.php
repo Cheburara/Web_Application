@@ -45,8 +45,7 @@ $username = isset($_SESSION['username']) ? $_SESSION['username'] : '';
             </p>
             <p>
                 <label>Name:</label>
-                <input type="text" name="name" id="name" value="<?php echo $_SESSION['username']; ?>"  pattern="[A-Za-z' -]+" required/>
-            </p>
+                <input type="text" name="name" id="name" value="<?php echo $username; ?>"  pattern="[A-Za-z' -]+" required/>
             <p>
                 <label>Address:</label>
                 <input type="text" name="address" id="address" required />
