@@ -33,10 +33,10 @@ font{
     text-decoration: none;
 }
 .secondl:hover {
-color: blue;
+color: #FF0080 !important;
 }
 .firstl:hover {
-color: blue;
+color: #FF0080 !important;
 } 
 header{
     display: flex;
@@ -64,7 +64,7 @@ header{
 /* Style for unselected label */
 .input-container label {
   padding: 5px;
-  border: 1px solid #007bff;
+  border: 1px solid #FF0080 !important;
   border-radius: 5px;
   cursor: pointer;
   display: inline-block;
@@ -75,7 +75,6 @@ header{
   margin-left: 10px;
 }
 #download {
-  display: inline-block;
   float: right;
   margin-top: -10px;
 }
@@ -87,7 +86,7 @@ header{
 #confirmedText {
     font-size: 24px;
     margin-top: 20px;
-    background-color: blueviolet;
+    background-color: #FF0080 !important;
     font-weight: bold;
     font-family: 'Questrial', sans-serif;
     font-family: 'Work Sans', sans-serif;
@@ -124,7 +123,7 @@ label {
     }
       
     input[type="submit"] {
-      background-color:blueviolet; 
+      background-color:#FF0080 !important; 
       border: none;
       border-radius: 5px;
       color: black;
