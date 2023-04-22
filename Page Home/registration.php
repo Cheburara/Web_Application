@@ -1,5 +1,10 @@
 <?php
+
 session_start();
+
+// Include database connection file
+require_once('db-connection.php');
+
 if(isset($_POST['submit'])) {
     $username = $_POST['username'];
     $email = $_POST['email'];
@@ -46,23 +51,40 @@ if(isset($_POST['submit'])) {
         }
         echo "</ul>";
     } else {
-        // open file to write it
-        $fp = fopen('users.csv', 'a');
+         // open database connection
+         $link = connectDatabase();
 
-        // write data 
-        fputcsv($fp, array($username, $email, $password));
+        // hash the password
+        $hashed_password = password_hash($password, PASSWORD_DEFAULT);
 
-        // close file
-        fclose($fp);
+         // prepare insert statement
+         $stmt = $link->prepare("INSERT INTO users (username, email, password) VALUES (?, ?, ?)");
+         $stmt->bind_param("sss", $username, $email, $hashed_password);
+ 
+         // execute insert statement
+         if ($stmt->execute()) {
+             // set session variables
+             $_SESSION['username'] = $username;
+             $_SESSION['email'] = $email;
+             $_SESSION['password'] = $password;
+ 
+             // redirect to success page
+             header('Location: thanku.html');
+             exit;
+         } else {
+             echo "Error: " . $stmt->error;
+         }
+ 
+         // close statement and connection
+         $stmt->close();
+         $link->close();
+     }
+ }
 
-        $_SESSION['username'] = $username;
-        $_SESSION['email'] = $email;
-        $_SESSION['password'] = $password;
 
-        // Redirection to success
-        header('Location: thanku.html');
-        exit;
-    }
-}
-?>
+
+
+
+ 
+
 
