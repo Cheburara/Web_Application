@@ -40,7 +40,7 @@
                     <li><a href="index.php">HOME</a></li>
                     <li><a href="services.php">SERVICES</a></li>
                     <li><a href="locations.html">LOCATIONS</a></li>
-                    <li><a href="my_profile.html">MY PROFILE</a></li>  
+                    <li><a href="my_profile.php">MY PROFILE</a></li>  
                     <div class="dropdown">
                         <button class="dropbtn">ABOUT US</button>
                         <div class="dropdown-content">
