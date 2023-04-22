@@ -89,7 +89,7 @@
     </div>
 
     <br><br>
-    <input type="checkbox" name="privacy-policy" required><font size="+2">I agree with privacy policy</font><br>
+    <input type="radio" name="privacy-policy" required><font size="+2">I agree with privacy policy</font><br>
     <input type="submit" id="submitReservation" name="submitReservation" value="Submit">
     
     
