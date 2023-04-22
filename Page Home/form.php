@@ -15,15 +15,22 @@ if(isset($_POST['submit'])) {
     }
 
     // Check if email exists in the database
-    $users = array_map('str_getcsv', file('users.csv'));
-    $emails = array_column($users, 1);
-    if (!in_array($email, $emails)) {
+    $link = connectDatabase();
+    $stmt = $link->prepare("SELECT * FROM users WHERE email = ?");
+    $stmt->bind_param("s", $email);
+    $stmt->execute();
+    $result = $stmt->get_result();
+
+    if ($result->num_rows == 0) {
         echo "Email address not found";
         exit;
     }
 
-    // Password validation
-    if(!preg_match('/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*()\-_=+{};:,<.>]).{8,}$/',$password)) {
+    // Fetch the user's information from the database
+    $user = $result->fetch_assoc();
+
+    // Validate the password format
+    if(!preg_match('/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^a-zA-Z0-9]).{8,}$/',$password)) {
         echo "Invalid password format. Password must be at least 8 characters long and contain at least one uppercase letter, one lowercase letter, one number, and one special character.";
         exit;
     }
@@ -35,28 +42,26 @@ if(isset($_POST['submit'])) {
         exit;
     }
 
-    // Hash the password before comparing it to the database
-    $hashed_password = password_hash($password, PASSWORD_DEFAULT);
+    // Compare the provided password with the hashed password in the database
+    if (password_verify($password, $user['password'])) {
+        // Regenerate the session ID
+        session_regenerate_id(true);
 
-    // Open the file for reading
-    $fp = fopen('users.csv', 'r');
+        // Set the session variable
+        $_SESSION['loggedIn'] = true;
+        $_SESSION['username'] = $user['username'];
+        $_SESSION['email'] = $user['email'];
 
-    // Loop through the file and look for a match
-    while ($row = fgetcsv($fp)) {
-        if (isset($row[1]) && isset($row[2]) && $row[1] == $email && $row[2] == $password) {
-            // Regenerate the session ID
-            session_regenerate_id(true);
-
-            // Set the session variable
-            $_SESSION['loggedIn'] = true;
-
-            // Redirect the user to the home page
-            header('Location: my_profile.php');
-            exit;
-        }
+        // Redirect the user to the home page
+        header('Location: my_profile.php');
+        exit;
     }
 
     // If we get here, the login failed
-   echo "Invalid email or passwordd";
+    echo "Invalid email or password";
 }
+
+// Close statement and connection
+$stmt->close();
+$link->close();
 ?>
