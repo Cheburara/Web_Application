@@ -21,7 +21,7 @@
                     <div class="inputbox">
                         <i class="fa fa-user" aria-hidden="true"></i>
                         <input type="username" name="username" required>
-                        <label for="#">Username</label>
+                        <label for="#">Name</label>
                     </div>
                     <div class="inputbox">
                         <i class="fa-regular fa-envelope"></i>

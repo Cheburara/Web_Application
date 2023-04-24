@@ -49,40 +49,23 @@ if (isset($_POST['submit'])) {
 
     // Compare the provided password with the hashed password in the database
     if (password_verify($password, $user['password'])) {
-        // Generate a unique session ID
-        $session_id = session_id();
-
-        // Store the session ID in the sessions table
-/*$stmt = $link->prepare("INSERT INTO sessions (user_id, session_id, created_at, updated_at) VALUES (?, ?, NOW(), NOW())");
-
-if (!$stmt) {
-    echo "Error preparing statement: " . $link->error;
-    exit;
-}
-
-$stmt->bind_param("is", $user['id'], $session_id);
-
-if (!$stmt->execute()) {
-    echo "Error executing statement: " . $stmt->error;
-    exit;
-}
-
-        // Update the user's last login time in the users table
-        $stmt = $link->prepare("UPDATE users SET last_login = NOW() WHERE id = ?");
-        $stmt->bind_param("i", $user['id']);
-        if (!$stmt->execute()) {
-            echo "Error executing statement: " . $stmt->error;
-            exit;
-        }
-
-        // Regenerate the session ID
-        session_regenerate_id(true);*/
 
         // Set the session variable
         $_SESSION['loggedIn'] = true;
         $_SESSION['username'] = $user['username'];
         $_SESSION['email'] = $user['email'];
+        $session_id = session_id();
         $_SESSION['session_id'] = $session_id;
+
+        // Insert the session ID into the user_sessions table
+        $stmt = $link->prepare("INSERT INTO sessions (user_id, session_id, last_activity) VALUES (?, ?, ?)");
+        $user_id = $user['id'];
+        $stmt = $link->prepare("UPDATE sessions SET last_activity = ? WHERE session_id = ?");
+$username = $_SESSION['username'];
+$stmt->bind_param("ss", $last_activity, $session_id);
+$last_activity = date('Y-m-d H:i:s');
+$session_id = $_SESSION['session_id'];
+$stmt->execute();
 
         // Redirect the user to the home page
         header('Location: my_profile.php');
@@ -92,6 +75,18 @@ if (!$stmt->execute()) {
     // If we get here, the login failed
     echo "Invalid email or password";
 }
+
+// Update the last_activity column in the user_sessions table
+$stmt = $link->prepare("UPDATE sessions SET last_activity = ? WHERE session_id = ?");
+$session_id = $_SESSION['session_id'];
+// Update the last_activity column in the user_sessions table
+$stmt = $link->prepare("UPDATE sessions SET last_activity = ? WHERE session_id = ?");
+$username = $_SESSION['username'];
+$session_id = session_id();
+$stmt->bind_param("ss", $session_id, $username); // Fixed the order of parameters
+$stmt->execute();
+
+$stmt->execute();
 
 // Close statement and connection
 $stmt->close();

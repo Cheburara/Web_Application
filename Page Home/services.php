@@ -1,49 +1,4 @@
-<?php
-require_once('db-connection.php');
 
-session_start();
-
-// Check if the user is logged in
-if(isset($_SESSION['loggedIn']) && $_SESSION['loggedIn']==true){
-    
-}
-
-function sanitize_input($input) {
-    return htmlspecialchars(stripslashes(trim($input)));
-}
-
-if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST["submitReservation"])) {
-    $timehours = sanitize_input($_POST["timehour"]);
-    $time2 = sanitize_input($_POST["time2"]);
-    $services = sanitize_input($_POST["service"]);
-
-    try {
-        $conn = new PDO("mysql:host=localhost;dbname=db_arroba", 'arroba', 'BedolagA614');
-        $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    } catch(PDOException $e) {
-        echo "Connection failed: " . $e->getMessage();
-        exit();
-    }
-    
-    $stmt = $conn->prepare("INSERT INTO reservations (timehour, time2, service) VALUES (?, ?, ?)");
-    $stmt->execute([$timehours, $time2, $services]);
-
-    header("Content-Type: text/csv");
-    header("Content-Disposition: attachment; filename=servicedata.csv");
-
-    $result = $conn->query("SELECT * FROM reservations");
-    $output = fopen("php://output", "w");
-    fputcsv($output, array('Time Hours', 'Time 2', 'Services'));
-
-    while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
-        fputcsv($output, $row);
-    }
-
-    fclose($output);
-    exit();
-}
-
-?>
  <!DOCTYPE html>
  <html lang="en">
   <head>
@@ -58,9 +13,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST["submitReservation"]))
 </head>
   <body>
   	<?php 
+    session_start();
        require_once('header.php'); 
         ?>
-<form action="services.php" method="post" >
+<form action="services_validation.php" method="post" >
     
   	 <div class="container">
             <div class="overlay">
@@ -99,78 +55,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST["submitReservation"]))
     <br><br>
     <input type="radio" name="privacy-policy" required><font size="+2">I agree with privacy policy</font><br>
     <input type="submit" id="submitReservation" name="submitReservation" value="Submit">
-    
-    
 </form>
-<?php
-
-// Check if the form is submitted
-if(isset($_POST['submitReservation'])){
-    require_once('db-connection.php'); // connect to the database
-    
-    // Server-side validation
-    $timehours = isset($_POST['timehour']) ? $_POST['timehour'] : '';
-    $time2 = $_POST['time2'];
-    $services = isset($_POST['service']) ? $_POST['service'] : '';
-
-    // Validation rules, no integers or forbidden symbols.
-    $isValid = true;
-    $timehourss = array("9:00-12:00", "15:00-19:00", "9:00-20:00");
-    if (empty($timehours) || !in_array($timehours, $timehourss)) {
-        $isValid = false;
-        echo "Invalid time slot!<br>";
+    <?php
+    if (isset($_SESSION['reservation_sent']) && $_SESSION['reservation_sent']) {
+        echo '<script language="javascript">';
+        echo 'alert("Reservation successfully sent")';
+        echo '</script>';
+        unset($_SESSION['reservation_sent']);
     }
-
-    $servicess = array("Full cleaning", "Surface and ground cleaning(dust, rubbish)", "Collection of large-scale garbage");
-    if (empty($services) || !in_array($services, $servicess)) {
-        $isValid = false;
-        echo "Invalid service!<br>";
-    }
-
-    if (!preg_match("/^[0-9]{4}-[0-9]{2}-[0-9]{2}$/", $time2)) {// YYYY-MM-DD format of date
-        $isValid = false;
-        echo "Invalid date!<br>";
-    }
-    else {
-        $timestamp = strtotime($time2);
-        $minDate = strtotime(date("Y-m-d"));
-        $maxDate = strtotime("2033-01-01");
-    
-        if (!$timestamp || $timestamp < $minDate || $timestamp > $maxDate) {
-            $isValid = false;
-            echo "Invalid date!<br>";
-        }
-    }
-    if (!checkdate(substr($time2, 5, 2), substr($time2, 8, 2), substr($time2, 0, 4))) {
-        $isValid = false;
-        echo "Invalid date!<br>";
-    }
-
-    if($isValid){
-        // Save data to reservations table
-        $timehour = mysqli_real_escape_string($conn, $timehours);
-        $time2 = mysqli_real_escape_string($conn, $time2);
-        $service = mysqli_real_escape_string($conn, $services);
-        
-        $query = "INSERT INTO reservations (timehour, time2, service) VALUES ('$timehour', '$time2', '$service')";
-        $result = mysqli_query($conn, $query);
-
-        if($result){
-            // Display confirmation message
-            echo '<form id="download" action="services.php" method="POST">';
-            echo '<input type="hidden" name="timehour" value='.$timehour.'>';
-            echo '<input type="hidden" name="time2" value='.$time2.'>';
-            echo '<input type="hidden" name="service" value='.$service.'>';
-            echo '<input type="submit" name="download" value="Download current data">';//download button
-            echo '</form>';
-        } else {
-            // Display error message
-            echo "<div id='confirmedError'>Reservation unsuccessful.</div>";
-        }
-        
-    }
-}
-?>
+    ?>
 
  </div>
         </div>
