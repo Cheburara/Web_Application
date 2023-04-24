@@ -1,3 +1,6 @@
+<?
+session_start();
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,27 +11,10 @@
     <link href="https://fonts.googleapis.com/css2?family=Questrial&family=Work+Sans&display=swap" rel="stylesheet"> 
     <title>EcoClean</title>
 </head>
-<body> <header>
-    <img class="logo" src="images/logoR.png" alt="logo" width="100px" height="100px">
-    <nav>
-        <ul class="nav__links">
-            <li><a href="index.php">HOME</a></li>
-            <li><a href="services.php">SERVICES</a></li>
-            <li><a href="locations.html">LOCATIONS</a></li>
-            <li><a href="my_profile.php">MY PROFILE</a></li>
-            <div class="dropdown">
-                <button class="dropbtn">ABOUT US</button>
-                <div class="dropdown-content">
-                    <a href="team.html">TEAM</a>
-                    <a href="history.html">HISTORY</a>
-                </div>
-            </div>
-        </ul>
-    </nav>
-    <a class="cta" href="form.html">
-        <button>Sign</button>
-    </a>
-</header>
+<body> 
+    <?php 
+       require_once('header.php'); 
+        ?>
     <section>
         <div class="form-box">
             <div class="form-value">
@@ -50,7 +36,7 @@
                     </div>
                     <button name="submit">Log in</button>
                     <div class="register">
-                        <p>Don't have an account <a href="registration.html"><br><br>Register</a></p>
+                        <p>Don't have an account <a href="registration.php"><br><br>Register</a></p>
                     </div>
                 </form>
             </div>

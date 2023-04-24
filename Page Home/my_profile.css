@@ -233,6 +233,14 @@ button:hover{
     font-family: 'Work Sans', sans-serif;
 }
 
+.overplay p{
+    display: block;
+    margin-bottom: 10px;
+    display: inline-block;
+        width: 110px;
+        font-weight: bold;
+}
+
 /* стилистика для панели футера */
 
 footer{

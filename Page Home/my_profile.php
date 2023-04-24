@@ -1,8 +1,27 @@
 <?php
 session_start();
-$email = isset($_SESSION['email']) ? $_SESSION['email'] : '';
-$username = isset($_SESSION['username']) ? $_SESSION['username'] : '';
+
+// Check if the user is logged in
+if(isset($_SESSION['loggedIn']) && $_SESSION['loggedIn']==true);
+
+$email = $_SESSION['email'];
+$username = $_SESSION['username'];
+
+// Handle form submission
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    if (isset($_POST['edit']) && $_POST['session_id'] === session_id()) {
+        $address = $_POST['address'];
+        $phone = $_POST['phone'];
+        // Save user's address and phone number to the database
+        // ...
+
+        // Redirect to the user's profile page
+        header('Location: my_profile.php');
+        exit();
+    }
+}
 ?>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -15,25 +34,9 @@ $username = isset($_SESSION['username']) ? $_SESSION['username'] : '';
     <title>My Profile</title>
 </head>
 <body>
-<header>
-    <img class="logo" src="images/logoR.png" alt="logo" width="100px" height="100px">
-    <nav>
-        <ul class="nav__links">
-            <li><a href="index.php">HOME</a></li>
-            <li><a href="services.php">SERVICES</a></li>
-            <li><a href="locations.html">LOCATIONS</a></li>
-            <li><a href="my_profile.php">MY PROFILE</a></li>
-            <div class="dropdown">
-                <button class="dropbtn">ABOUT US</button>
-                <div class="dropdown-content">
-                    <a href="team.html">TEAM</a>
-                    <a href="history.html">HISTORY</a>
-                </div>
-            </div>
-        </ul>
-    </nav>
-    <a class="cta" href="form.html"><button>Sign</button></a>
-</header>
+<?php 
+       require_once('header.php'); 
+        ?>
 <div class="container">
     <div class="overlay">
         <h1>My Profile</h1>
@@ -51,6 +54,17 @@ $username = isset($_SESSION['username']) ? $_SESSION['username'] : '';
                 <input type="text" name="address" id="address" required />
             </p>
             <p>
+                <label>Phone:</label>
+                <input type="text" name="phone" id="phone" value="" pattern="[0-9]{10}" required />
+            </p>
+            <p>
+            <label>Order History:</label>
+             <?php
+        // Retrieve user's order history from database and display it
+        // ...
+             ?>
+            </p>
+           <p>
                 <button type="submit" name="edit" id="edit">Edit</button>
             </p>
         </form>

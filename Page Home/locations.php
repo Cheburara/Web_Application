@@ -1,3 +1,7 @@
+<?php 
+require_once('db-connection.php');
+session_start();
+?>
 <!DOCTYPE html>
  <html>
   <head>
@@ -10,25 +14,9 @@
         <title>Locations</title>
   </head>
   <body>
-  	<header>
-  		<img class="logo" src="images/logoR.png" alt="logo" width="100px" height="100px">
-            <nav>
-                <ul class="nav__links">
-                    <li><a href="index.php">HOME</a></li>
-                    <li><a href="services.php">SERVICES</a></li>
-                    <li><a href="locations.html">LOCATIONS</a></li>
-                    <li><a href="my_profile.php">MY PROFILE</a></li>    
-                    <div class="dropdown">
-                        <button class="dropbtn">ABOUT US</button>
-                        <div class="dropdown-content">
-                            <a href="team.html">TEAM</a>
-                            <a href="history.html">HISTORY</a> 
-                        </div>
-                        </div>  
-                </ul>
-            </nav>
-            <a class="cta" href="form.html"><button>Sign</button></a>
-  	</header>
+    <?php 
+    require_once('header.php'); 
+     ?>
   	 <div class="container">
             <div class="overlay">    
                 <p>Areas where we provide our services: Tallinn city - <br></p>
