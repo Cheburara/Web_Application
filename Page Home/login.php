@@ -1,6 +1,4 @@
-<?
-session_start();
-?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -13,12 +11,13 @@ session_start();
 </head>
 <body> 
     <?php 
+       session_start();
        require_once('header.php'); 
         ?>
     <section>
         <div class="form-box">
             <div class="form-value">
-                <form action="form.php" method="POST">
+                <form action="login_validation.php" method="POST">
                     <h2>Login</h2>
                     <div class="inputbox">
                         <i class="fa-regular fa-envelope"></i>
