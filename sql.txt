@@ -4,3 +4,13 @@ CREATE TABLE users (
   email VARCHAR(255),
   password VARCHAR(255)
 );
+
+CREATE TABLE sessions (
+  id INT(11) NOT NULL AUTO_INCREMENT,
+  user_id INT(11) NOT NULL,
+  session_id VARCHAR(255) NOT NULL,
+  last_activity DATETIME NOT NULL,
+  PRIMARY KEY (id),
+  INDEX (user_id),
+  INDEX (session_id)
+);
