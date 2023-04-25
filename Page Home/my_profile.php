@@ -62,8 +62,23 @@ $reservations = mysqli_fetch_all($result, MYSQLI_ASSOC);
                 <label>Name:</label>
                 <input type="text" name="name" id="name" value="<?php echo $username; ?>"  pattern="[A-Za-z' -]+" required/>
             <p>
-                <label>Address:</label>
-                <input type="text" name="address" id="address" value="<?php echo $reservations[0]['address']; ?>" required />
+            <?php
+    if (!empty($reservations)) {
+?>
+        <p>
+            <label>Address:</label>
+            <input type="text" name="address" id="address" value="<?php echo $reservations[0]['address']; ?>" required />
+        </p>
+<?php
+    } else {
+?>
+        <p>
+            <label>Address:</label>
+            <input type="text" name="address" id="address" placeholder="None of orders are done yet" required />
+        </p>
+<?php
+    }
+?>
             </p>
             <p>
                 <label>Phone:</label>

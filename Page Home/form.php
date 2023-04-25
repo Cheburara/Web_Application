@@ -47,6 +47,10 @@ if (isset($_POST['submit'])) {
         exit;
     }
 
+    // Generate a new session ID
+    session_regenerate_id();
+    $session_id = session_id();
+
     // Compare the provided password with the hashed password in the database
     if (password_verify($password, $user['password'])) {
 
