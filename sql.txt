@@ -22,4 +22,6 @@ CREATE TABLE reservations (
 );
 ALTER TABLE reservations ADD COLUMN user_id INT NOT NULL;
 ALTER TABLE reservations ADD COLUMN address VARCHAR(255) NOT NULL;
+ALTER TABLE products
+ADD price DECIMAL(10,2);
 
