@@ -26,18 +26,24 @@ echo '<button onclick="showOrderHistory()">Show Order History</button>';
 
 // Display the order history table in a hidden div
 echo '<div id="orderHistory" style="display:none">';
-echo '<table>';
-echo '<tr><th>Time</th><th>Data</th><th>Service</th><th>Address</th><th>Price</th></tr>';
-while ($row = mysqli_fetch_assoc($result)) {
-    echo '<tr>';
-    echo '<td>' . $row['timehour'] . '</td>';
-    echo '<td>' .  date('Y-m-d', strtotime($row['time2'])) . '</td>';
-    echo '<td>' . $row['service'] . '</td>';
-    //echo '<td>' . $row['price'] . '</td>';
-    echo '<td>' . $row['address'] . '</td>';
-    echo '</tr>';
+if(mysqli_num_rows($result) == 0) {
+    // If there are no orders, display a message instead of a table
+    echo 'None of orders are done yet';
+} else {
+    // Display the table with order history
+    echo '<table>';
+    echo '<tr><th>Time</th><th>Data</th><th>Service</th><th>Address</th><th>Price</th></tr>';
+    while ($row = mysqli_fetch_assoc($result)) {
+        echo '<tr>';
+        echo '<td>' . $row['timehour'] . '</td>';
+        echo '<td>' .  date('Y-m-d', strtotime($row['time2'])) . '</td>';
+        echo '<td>' . $row['service'] . '</td>';
+        //echo '<td>' . $row['price'] . '</td>';
+        echo '<td>' . $row['address'] . '</td>';
+        echo '</tr>';
+    }
+    echo '</table>';
 }
-echo '</table>';
 echo '</div>';
 
 // Close the database connection
