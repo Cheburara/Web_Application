@@ -67,6 +67,15 @@
 
   /* стилистика для основной части*/
 
+#text span {
+    opacity: 0;
+    transition: opacity 1s ease-in-out;
+}
+
+#text span.fade {
+    opacity: 1;
+}
+
    .container{
     width: 100;
     height: 100vh;
