@@ -80,10 +80,10 @@ $reservations = mysqli_fetch_all($result, MYSQLI_ASSOC);
     }
 ?>
             </p>
-            <p>
+            <!-- <p>
                 <label>Phone:</label>
                 <input type="text" name="phone" id="phone" value="" pattern="[0-9]{10}" required />
-            </p>
+            </p> -->
            <p>
                 <button type="submit" name="edit" id="edit">Edit</button>
             </p>
