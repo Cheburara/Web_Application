@@ -17,7 +17,7 @@
     <section>
         <div class="form-box">
             <div class="form-value">
-                <form action="login_validation.php" method="POST">
+                <form action="form.php" method="POST">
                     <h2>Login</h2>
                     <div class="inputbox">
                         <i class="fa-regular fa-envelope"></i>
@@ -30,7 +30,7 @@
                         <label for="password">Password</label>
                     </div>
                     <div class="forget">
-                        <label for="forget"><input type="checkbox">Remember Mee</label>
+                        <label for="forget"><input type="checkbox">Remember Me</label>
                         <a href="confirm_password">Forget Password</a>
                     </div>
                     <button name="submit">Log in</button>
