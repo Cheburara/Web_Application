@@ -38,8 +38,8 @@ if(mysqli_num_rows($result) == 0) {
         echo '<td>' . $row['timehour'] . '</td>';
         echo '<td>' .  date('Y-m-d', strtotime($row['time2'])) . '</td>';
         echo '<td>' . $row['service'] . '</td>';
-        //echo '<td>' . $row['price'] . '</td>';
         echo '<td>' . $row['address'] . '</td>';
+        echo '<td>' . $row['price'] . '</td>';
         echo '</tr>';
     }
     echo '</table>';

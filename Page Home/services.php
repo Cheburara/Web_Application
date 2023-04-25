@@ -9,7 +9,48 @@
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Questrial&family=Work+Sans&display=swap" rel="stylesheet">
         <title>Services</title>
+        <script>
+function calculatePrice() {
+  // Get the selected options
+  var timehour = document.querySelector('input[name="timehour"]:checked').value;
+  var service = document.querySelector('input[name="service"]:checked').value;
 
+  // Calculate the price based on the selected options
+  var price = 0;
+  if (timehour === "9:00-12:00") {
+    price += 50;
+  } else if (timehour === "15:00-19:00") {
+    price += 70;
+  } else if (timehour === "9:00-20:00") {
+    price += 100;
+  }
+  if (service === "Full-clean") {
+    price += 100;
+  } else if (service === "Surface") {
+    price += 50;
+  } else if (service === "Large-scale") {
+    price += 150;
+  }
+
+  // Set the calculated price to the price field
+  document.getElementById("price").value = "$" + price;
+  document.getElementById("price").value = price;
+
+}
+
+// Add an event listener to the time and service elements to calculate the price automatically
+document.addEventListener("DOMContentLoaded", function() {
+  var timeElements = document.querySelectorAll('input[name="timehour"]');
+  for (var i = 0; i < timeElements.length; i++) {
+    timeElements[i].addEventListener("change", calculatePrice);
+  }
+
+  var serviceElements = document.querySelectorAll('input[name="service"]');
+  for (var i = 0; i < serviceElements.length; i++) {
+    serviceElements[i].addEventListener("change", calculatePrice);
+  }
+});
+</script>
 </head>
   <body>
   	<?php 
@@ -50,6 +91,9 @@
     <br>
     <input type="radio" id="Third op" name="service" value="Large-scale" required>
     <label for="Third op"><font size="+1">Collection of large-scale garbage</font></label>
+    <br>
+    <label for="price">Price:</label>
+    <input type="text" id="price" name="price" class="price" readonly  style="color: white !important;">
     <br>
     <label for="address">Address:</label>
     <input type="text" id="address-input" name="address" placeholder="Enter your address">

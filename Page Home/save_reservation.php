@@ -8,6 +8,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST["submitReservation"]))
     $time2 = sanitize_input($_POST["time2"]);
     $services = sanitize_input($_POST["service"]);
     $address = sanitize_input($_POST["address"]);
+    $price = sanitize_input($_POST["price"]);
 
     try {
         $conn = new PDO("mysql:host=localhost;dbname=db_arroba", 'arroba', 'BedolagA614');
@@ -24,8 +25,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST["submitReservation"]))
     $user_id = $user['id'];
 
     // Insert the reservation into the reservations table
-    $stmt = $conn->prepare("INSERT INTO reservations (user_id, timehour, time2, service, address) VALUES (?, ?, ?, ?, ?)");
-    $stmt->execute([$user_id, $timehours, $time2, $services, $address]);
+    $stmt = $conn->prepare("INSERT INTO reservations (user_id, timehour, time2, service, address, price) VALUES (?, ?, ?, ?, ?, ?)");
+    $stmt->execute([$user_id, $timehours, $time2, $services, $address, $price]);
 
     // After the reservation is successfully added to the database
     $_SESSION['reservation_sent'] = true;

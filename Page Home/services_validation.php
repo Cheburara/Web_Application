@@ -11,6 +11,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST["submitReservation"]))
     $time2 = sanitize_input($_POST["time2"]);
     $services = sanitize_input($_POST["service"]);
     $address = sanitize_input($_POST["address"]);
+    $price = sanitize_input($_POST["price"]);
  
     // Validation rules
     $isValid = true;
@@ -49,6 +50,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST["submitReservation"]))
     } else if (!preg_match("/^[a-zA-Z0-9\säöüõÄÖÜÕ.,#-]+$/u", $address)) {
         $isValid = false;
         echo "Invalid address!<br>";
+    } 
+    if (!is_numeric($price) || $price <= 0) {
+        $isValid = false;
+        echo "Invalid price!<br>";
     }
 
     if($isValid){
@@ -56,7 +61,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST["submitReservation"]))
         $_SESSION['reservationData'] = array(
             'timehour' => $timehours,
             'time2' => $time2,
-            'service' => $services
+            'service' => $services,
+            'price' => $price
         );
         require_once "save_reservation.php"; // Redirect to the next page
         exit();

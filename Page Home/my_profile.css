@@ -243,9 +243,10 @@ button:hover{
 
 
 .order-history-table {
-    border-collapse: collapse;
     width: 100%;
-  }
+        border-collapse: separate;
+        border-spacing: 50px;
+       }
   tr{
     font-size: 18px;
   }
