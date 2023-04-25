@@ -241,6 +241,18 @@ button:hover{
         font-weight: bold;
 }
 
+
+.order-history-table {
+    border-collapse: collapse;
+    width: 100%;
+  }
+  tr{
+    font-size: 18px;
+  }
+  td{
+    font-size: 12px;
+  }
+
 /* стилистика для панели футера */
 
 footer{

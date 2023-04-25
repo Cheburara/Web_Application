@@ -1,6 +1,7 @@
 <?php
 session_start();
 
+
 // Check if the user is logged in
 if(isset($_SESSION['loggedIn']) && $_SESSION['loggedIn']==true);
 
@@ -12,8 +13,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (isset($_POST['edit']) && $_POST['session_id'] === session_id()) {
         $address = $_POST['address'];
         $phone = $_POST['phone'];
-        // Save user's address and phone number to the database
+        // Save phone number to the database
         // ...
+        // Retrieve the latest address from the database
+        $sql = "SELECT address FROM reservations WHERE user_id = ? ORDER BY id DESC LIMIT 1";
+        $stmt = $pdo->prepare($sql);
+        $stmt->execute([$user_id]);
+        $latest_address = $stmt->fetchColumn();
+
+        // Assign the latest address to the $address variable
+        $address = $latest_address;
 
         // Redirect to the user's profile page
         header('Location: my_profile.php');
@@ -51,23 +60,22 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <input type="text" name="name" id="name" value="<?php echo $username; ?>"  pattern="[A-Za-z' -]+" required/>
             <p>
                 <label>Address:</label>
-                <input type="text" name="address" id="address" required />
+                <input type="text" name="address" id="address" value="<?php echo $address; ?>" required />
             </p>
             <p>
                 <label>Phone:</label>
                 <input type="text" name="phone" id="phone" value="" pattern="[0-9]{10}" required />
             </p>
-            <p>
-            <label>Order History:</label>
+           <p>
+                <button type="submit" name="edit" id="edit">Edit</button>
+            </p>
+        </form>
              <?php
             // Retrieve user's order history from database and display it
             include('order_history.php');
              ?>
             </p>
            <p>
-                <button type="submit" name="edit" id="edit">Edit</button>
-            </p>
-        </form>
     </div>
 </div>
 <footer>
