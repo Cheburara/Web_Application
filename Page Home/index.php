@@ -19,7 +19,7 @@ session_start();
         ?>
         <div class="container">
             <div class="overlay">
-                <h1>MAKE THE WORLD A CLEANER PLACE, <br>STARTING WITH YOUR OWN SPACE</h1>
+                <h1 id="text">MAKE THE WORLD A CLEANER PLACE, <br>STARTING WITH YOUR OWN SPACE</h1>
             </div>
         </div>
         <script>
