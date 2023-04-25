@@ -1,34 +1,37 @@
 <?php
+require_once('db-connection.php');
 session_start();
 
-
 // Check if the user is logged in
-if(isset($_SESSION['loggedIn']) && $_SESSION['loggedIn']==true);
-
-$email = $_SESSION['email'];
-$username = $_SESSION['username'];
-
-// Handle form submission
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    if (isset($_POST['edit']) && $_POST['session_id'] === session_id()) {
-        $address = $_POST['address'];
-        $phone = $_POST['phone'];
-        // Save phone number to the database
-        // ...
-        // Retrieve the latest address from the database
-        $sql = "SELECT address FROM reservations WHERE user_id = ? ORDER BY id DESC LIMIT 1";
-        $stmt = $pdo->prepare($sql);
-        $stmt->execute([$user_id]);
-        $latest_address = $stmt->fetchColumn();
-
-        // Assign the latest address to the $address variable
-        $address = $latest_address;
-
-        // Redirect to the user's profile page
-        header('Location: my_profile.php');
-        exit();
-    }
+if(!isset($_SESSION['loggedIn']) || $_SESSION['loggedIn'] !== true) {
+    header('Location: login.php');
+    exit();
 }
+
+// Get the session ID
+$session_id = session_id();
+
+// Connect to the database
+$link = mysqli_connect('localhost', 'arroba', 'BedolagA614', 'db_arroba');
+
+// Get the user's ID from the sessions table
+$query = "SELECT user_id FROM sessions WHERE session_id = '$session_id'";
+$result = mysqli_query($link, $query);
+$row = mysqli_fetch_assoc($result);
+$user_id = $row['user_id'];
+
+// Get the user's information from the users table
+$query = "SELECT username, email FROM users WHERE id = '$user_id'";
+$result = mysqli_query($link, $query);
+$row = mysqli_fetch_assoc($result);
+$username = $row['username'];
+$email = $row['email'];
+
+// Get the user's address from the reservations table
+$query = "SELECT address FROM reservations WHERE user_id = '$user_id' ORDER BY id DESC LIMIT 1";
+$result = mysqli_query($link, $query);
+$reservations = mysqli_fetch_all($result, MYSQLI_ASSOC);
+
 ?>
 
 <!DOCTYPE html>
@@ -60,7 +63,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <input type="text" name="name" id="name" value="<?php echo $username; ?>"  pattern="[A-Za-z' -]+" required/>
             <p>
                 <label>Address:</label>
-                <input type="text" name="address" id="address" value="<?php echo $address; ?>" required />
+                <input type="text" name="address" id="address" value="<?php echo $reservations[0]['address']; ?>" required />
             </p>
             <p>
                 <label>Phone:</label>
