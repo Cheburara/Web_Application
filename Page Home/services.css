@@ -74,6 +74,23 @@ header{
 .input-container input[type="radio"] + label {
   margin-left: 10px;
 }
+
+.section label{
+   border: 1px solid #FF0080 !important;
+}
+#address-input{
+  font-family: 'Work Sans', sans-serif;
+  color:#fbfcfd;
+  text-decoration: none;
+
+}
+
+#address-input input[type="text"] {
+  color:#fbfcfd;
+}
+#address-input .pac-target-input{
+  color:#fbfcfd;
+}
 #download {
   float: right;
   margin-top: -10px;

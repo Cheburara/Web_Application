@@ -51,9 +51,10 @@
     <input type="radio" id="Third op" name="service" value="Large-scale" required>
     <label for="Third op"><font size="+1">Collection of large-scale garbage</font></label>
     <br>
+    <section>
     <label for="address">Address:</label>
-    
     <input type="text" id="address-input" name="address" placeholder="Enter your address">
+    </section>
     </div>
 
     <br><br>
