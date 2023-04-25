@@ -29,6 +29,6 @@ function validateLoginInput($email, $password) {
  $_SESSION['session_id'] = $session_id;
 
  // Redirect the user to the save_login.php script
- header('Location: login_save.php');
+ header('Location: login_save_db.php');
  exit;
 ?>
