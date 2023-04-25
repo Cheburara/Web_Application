@@ -23,13 +23,14 @@ $result = mysqli_query($link, $query);
 
 // Display the order history in a table
 echo '<table>';
-echo '<tr><th>Time</th><th>Data</th><th>Service</th><th>Price</th></tr>';
+echo '<tr><th>Time</th><th>Data</th><th>Service</th><th>Address</th><th>Price</th></tr>';
 while ($row = mysqli_fetch_assoc($result)) {
     echo '<tr>';
     echo '<td>' . $row['timehour'] . '</td>';
     echo '<td>' .  date('Y-m-d', strtotime($row['time2'])) . '</td>';
     echo '<td>' . $row['service'] . '</td>';
     //echo '<td>' . $row['price'] . '</td>';
+    echo '<td>' . $row['address'] . '</td>';
     echo '</tr>';
 }
 echo '</table>';

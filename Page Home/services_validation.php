@@ -10,6 +10,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST["submitReservation"]))
     $timehours = sanitize_input($_POST["timehour"]);
     $time2 = sanitize_input($_POST["time2"]);
     $services = sanitize_input($_POST["service"]);
+    $address = sanitize_input($_POST["address"]);
  
     // Validation rules
     $isValid = true;
@@ -42,6 +43,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST["submitReservation"]))
     if (!checkdate(substr($time2, 5, 2), substr($time2, 8, 2), substr($time2, 0, 4))) {
         $isValid = false;
         echo "Invalid date!<br>";
+    }if (empty($address)) {
+        $isValid = false;
+        echo "Invalid address!<br>";
+    } else if (!preg_match("/^[a-zA-Z0-9\säöüõÄÖÜÕ.,#-]+$/u", $address)) {
+        $isValid = false;
+        echo "Invalid address!<br>";
     }
 
     if($isValid){
