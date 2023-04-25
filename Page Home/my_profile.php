@@ -60,8 +60,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <p>
             <label>Order History:</label>
              <?php
-        // Retrieve user's order history from database and display it
-        // ...
+            // Retrieve user's order history from database and display it
+            include('order_history.php');
              ?>
             </p>
            <p>

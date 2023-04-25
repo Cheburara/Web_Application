@@ -50,6 +50,10 @@
     <br>
     <input type="radio" id="Third op" name="service" value="Large-scale" required>
     <label for="Third op"><font size="+1">Collection of large-scale garbage</font></label>
+    <br>
+    <label for="address">Address:</label>
+    
+    <input type="text" id="address-input" name="address" placeholder="Enter your address">
     </div>
 
     <br><br>
@@ -83,5 +87,12 @@
                 <p>Copyright</p>
             </div>
         </footer>
+        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBjVsfVaKjQQbVIBR-O_5ZQlbZnYSiojnc&libraries=places&language=EN"></script>
+        <script>
+        var input = document.getElementById('address-input');
+var options = {
+    componentRestrictions: { country: 'ee' }
+};
+var autocomplete = new google.maps.places.Autocomplete(input, options);</script>
     </body>
 </html>
