@@ -1,9 +1,9 @@
 <?php
 function connectDatabase() {
-    $DB_HOST = 'localhost';
-    $DB_USER = 'arroba';
-    $DB_PASS = 'BedolagA614';
-    $DB_NAME = 'db_arroba';
+    $DB_HOST = 'anysql.itcollege.ee';
+    $DB_USER = 'ICS0008_WT_23';
+    $DB_PASS = '134fdaeb6fe1';
+    $DB_NAME = 'ICS0008_23';
 
     $link = new mysqli($DB_HOST, $DB_USER, $DB_PASS, $DB_NAME);
 
