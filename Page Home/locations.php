@@ -1,36 +1,43 @@
-<?php 
-require_once('db-connection.php');
-session_start();
-?>
 <!DOCTYPE html>
  <html>
   <head>
   	<meta charset="utf-8">
-  	<link rel="stylesheet" href="locations.css">
-  	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css"  /> 
+  	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css"/>
+      <link rel="stylesheet" href="locations.css">
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Questrial&family=Work+Sans&display=swap" rel="stylesheet">
         <title>Locations</title>
   </head>
-  <body>
-    <?php 
-    require_once('header.php'); 
-     ?>
-  	 <div class="container">
-            <div class="overlay">    
-                <p>Areas where we provide our services: Tallinn city - <br></p>
-                <p><b>
-                    <a href="https://www.google.ee/maps/place/Kristiine,+Tallinn/@59.41386,24.6688162,13z/data=!3m1!4b1!4m6!3m5!1s0x469294f17b47fd7b:0x500b36d18fc7120!8m2!3d59.4164146!4d24.7100188!16s%2Fm%2F02r5t6_?hl=en" class="firstl">KRISTIINE</a></b><br></p>
-                    <p><b>
-                        
-                    <a href="https://www.google.ee/maps/place/Mustam%C3%A4e,+Tallinn/@59.4053159,24.6395594,13z/data=!3m1!4b1!4m6!3m5!1s0x469294559821082d:0x500b36d18fc7110!8m2!3d59.401031!4d24.6945077!16zL20vMGRoZjI3?hl=en" class="secondl">MUSTAMÄE</a></b><br>
-                    <i>Private houses, cottages, yard area and garbage cans service</i></p>
-            </div>
-            <div class="overlay2">
-            	<p1>Also, our service covers planting areas, lawns in case of company contract</p1>
-            </div>
-        </div>
+  <body onload="initMap()">
+  <?php
+       require_once('header.php');
+        ?>
+    <div class="container">
+        <div class="overlay">
+        <h2>Our Headquaters</h2>
+        <p>Taltech University, Tammasaarenkatu 7, P.O. Box 24, 00181 <br> Tallinn </p>
+        <div id="map" style="height: 500px"></div>
+        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBjVsfVaKjQQbVIBR-O_5ZQlbZnYSiojnc"></script>
+        <script>
+            function initMap() {
+                // The location of Uluru
+                const tallinn = { lat:59.39499615513293, lng:24.671981726169246, };
+                // The map, centered at Uluru
+                const map = new google.maps.Map(document.getElementById("map"), {
+                    zoom: 12,
+                    center: tallinn,
+                });
+                // The marker, positioned at Uluru
+                const marker = new google.maps.Marker({
+                    position: tallinn,
+                    map: map,
+                });
+            }
+            window.initMap = initMap;
+        </script>
+     </div>
+    </div>
     <footer>
         <div class="footer-content">
             <h3>EcoClean</h3>
