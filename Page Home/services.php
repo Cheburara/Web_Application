@@ -62,7 +62,7 @@ document.addEventListener("DOMContentLoaded", function() {
   	 <div class="container">
             <div class="overlay">
             <div id="request">    
-                <h1><i>Garbage collection request</i></h1><br>
+                <h1>Garbage collection request</h1><br>
                 <form action="submit-form.php">
             
         <label for="timehour"><font size="+1">Select time:</font></label><br>
@@ -75,12 +75,12 @@ document.addEventListener("DOMContentLoaded", function() {
         </div>
         <br>
         <br>
-    <label for="time2">Service day (Monday, Tuesday, Friday only):</label>
+    <label for="time2">Select service day:</label>
     <input type="date" name="time2" id="time2" class="time2"
        required min="2023-01-01" max="2033-01-01" required>
         <br>
         <br>
-    <label for="service"><font size="+1">Type of service:</font></label>
+    <label for="service"><font size="+1">Select type of service:</font></label>
      <br>
     <div class="input-container">
     <input type="radio" id="First op" name="service" value="Full-clean" required>
