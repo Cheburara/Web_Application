@@ -1,16 +1,36 @@
 <?php
-
 require_once('db-connection.php');
-
 session_start();
 
-if (isset($_POST['submit'])) {
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $email = $_POST['email'];
     $password = $_POST['password'];
+    $errors = array();
 
     // Email validation
     if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-        echo "Invalid email format";
+        $errors[] = "Invalid email format";
+    }
+
+    // Validate the password format
+    if (!preg_match('/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^a-zA-Z0-9]).{8,}$/',$password)) {
+        $errors[] = "Invalid password format. Password must be at least 8 characters long and contain at least one uppercase letter, one lowercase letter, one number, and one special character.";
+    }
+
+    // Check if password is strong enough
+    $weak_passwords = array("password", "123456", "12345678", "qwerty", "abc123", "password1", "admin", "123123", "letmein", "welcome", "monkey", "football", "1234567", "access", "master", "sunshine", "letmein", "shadow", "password1", "hello", "charlie", "trustno1", "welcome1", "jennifer", "monkey1", "password2");
+    if (in_array($password, $weak_passwords)) {
+        $errors[] = "Password is too weak";
+    }
+
+    if (!empty($errors)) {
+        // Display error messages as alerts and redirect to login.php
+        echo "<script>";
+        foreach ($errors as $error) {
+            echo "alert('$error');";
+        }
+        echo "window.location.replace('login.php');";
+        echo "</script>";
         exit;
     }
 
@@ -27,38 +47,24 @@ if (isset($_POST['submit'])) {
     }
 
     if ($result->num_rows == 0) {
-        echo "Email address not found";
-        exit;
+        echo '<script>alert("Email address not found");</script>';
+        echo "<script>setTimeout(function(){window.location.href='login.php';},1000);</script>";
+    exit;
     }
 
     // Fetch the user's information from the database
     $user = $result->fetch_assoc();
 
-    // Validate the password format
-    if (!preg_match('/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^a-zA-Z0-9]).{8,}$/',$password)) {
-        echo "<script>alert('Invalid password format. Password must be at least 8 characters long and contain at least one uppercase letter, one lowercase letter, one number, and one special character.');</script>";
-        exit;
-    }
-
-    // Check if password is strong enough
-    $weak_passwords = array("password", "123456", "12345678", "qwerty", "abc123", "password1", "admin", "123123", "letmein", "welcome", "monkey", "football", "1234567", "access", "master", "sunshine", "letmein", "shadow", "password1", "hello", "charlie", "trustno1", "welcome1", "jennifer", "monkey1", "password2");
-    if (in_array($password, $weak_passwords)) {
-        echo "Password is too weak";
-        exit;
-    }
-
-    // Generate a new session ID
-    session_regenerate_id();
-    $session_id = session_id();
-
     // Compare the provided password with the hashed password in the database
     if (password_verify($password, $user['password'])) {
+        // Generate a new session ID
+        session_regenerate_id();
+        $session_id = session_id();
 
         // Set the session variable
         $_SESSION['loggedIn'] = true;
         $_SESSION['username'] = $user['username'];
         $_SESSION['email'] = $user['email'];
-        $session_id = session_id();
         $_SESSION['session_id'] = $session_id;
 
         // Insert the session ID into the sessions table
@@ -71,10 +77,10 @@ if (isset($_POST['submit'])) {
         // Redirect the user to the home page
         header('Location: my_profile.php');
         exit;
+    } else {
+        // If we get here, the login failed
+        echo "Invalid email or password";
     }
-
-    // If we get here, the login failed
-    echo "Invalid email or password";
 }
 
 // Update the last_activity column in the sessions table

@@ -21,14 +21,31 @@ function validateLoginInput($email, $password) {
 
     return $errors;
 }
- // If we get here, the validation passed
- $_SESSION['loggedIn'] = true;
- $_SESSION['username'] = $user['username'];
- $_SESSION['email'] = $user['email'];
- $session_id = session_id();
- $_SESSION['session_id'] = $session_id;
 
- // Redirect the user to the save_login.php script
- header('Location: login_save_db.php');
- exit;
-?>
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    // Validate the login form input
+    $email = $_POST['email'];
+    $password = $_POST['password'];
+    $errors = validateLoginInput($email, $password);
+
+    if (!empty($errors)) {
+        // Display error messages as alerts and redirect to login.php
+        echo "<script>";
+        foreach ($errors as $error) {
+            echo "alert('$error');";
+        }
+        echo "window.location.replace('login.php');";
+        echo "</script>";
+        exit;
+    } else {
+        // If we get here, the validation passed
+        $_SESSION['loggedIn'] = true;
+        $_SESSION['email'] = $email;
+        $session_id = session_id();
+        $_SESSION['session_id'] = $session_id;
+
+        // Redirect the user to the save_login.php script
+        header('Location: login_save_db.php');
+        exit;
+    }
+}

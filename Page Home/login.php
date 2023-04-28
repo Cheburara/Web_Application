@@ -17,7 +17,7 @@
     <section>
         <div class="form-box">
             <div class="form-value">
-                <form action="form.php" method="POST">
+                <form id="login-form" action="form.php" method="POST">
                     <h2>Login</h2>
                     <div class="inputbox">
                         <i class="fa-regular fa-envelope"></i>
@@ -34,14 +34,6 @@
                         <a href="confirm_password">Forget Password</a>
                     </div>
                     <button name="submit">Log in</button>
-                    <script>
-                        document.getElementById("submit-button").addEventListener("click", function() {
-                     var password = document.getElementById("password").value;
-                        if (!/(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^a-zA-Z0-9]).{8,}/.test(password)) {
-                        alert("Invalid password format. Password must be at least 8 characters long and contain at least one uppercase letter, one lowercase letter, one number, and one special character.");
-                        }
-                        });
-                    </script>
                     <div class="register">
                         <p>Don't have an account <a href="registration.php"><br><br>Register</a></p>
                     </div>
