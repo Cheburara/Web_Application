@@ -31,7 +31,7 @@ if (isset($_POST['change_password'])) {
     }
     
     // Check if old password matches with the one stored in the database
-    $link = mysqli_connect("localhost", "arroba", "BedolagA614", "db_arroba");
+    $link = mysqli_connect("anysql.itcollege.ee", "ICS0008_WT_23", "134fdaeb6fe1", "ICS0008_23");
     if (!$link) {
         die("Connection failed: " . mysqli_connect_error());
     }
@@ -48,7 +48,7 @@ if (isset($_POST['change_password'])) {
     // If there are no errors, update the user's password in the database
     if (empty($errors)) {
         // Establish a database connection
-        $link = mysqli_connect("localhost", "arroba", "BedolagA614", "db_arroba");
+        $link = mysqli_connect("anysql.itcollege.ee", "ICS0008_WT_23", "134fdaeb6fe1", "ICS0008_23");
         if (!$link) {
             die("Connection failed: " . mysqli_connect_error());
         }

@@ -9,7 +9,7 @@ require_once('db-connection.php');
 }
 
 // Connect to the database
-$link = mysqli_connect('localhost', 'arroba', 'BedolagA614', 'db_arroba');
+$link = mysqli_connect('anysql.itcollege.ee', 'ICS0008_WT_23', '134fdaeb6fe1', 'ICS0008_23');
 
 $email = $_SESSION['email'];
 $query = "SELECT id FROM users WHERE email = '$email'";
