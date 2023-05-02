@@ -35,6 +35,7 @@ $_SESSION['user_id'] = $user_id;
         ?>
         <div class="container">
     <div class="overlay">
+    <div class="change">
     <h1>Change Password</h1> 
         <form action="change_password.php" method="POST" id="profileEdit" name="profileEdit">
     <input type="hidden" name="session_id" value="<?php echo session_id(); ?>">
@@ -56,6 +57,7 @@ $_SESSION['user_id'] = $user_id;
                 <a href="my_profile.php">Cancel</a>
             </p>
 </form>
+</div>
     </div>
 </div>
 <footer>

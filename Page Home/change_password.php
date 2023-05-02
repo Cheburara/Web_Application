@@ -62,10 +62,8 @@ if (isset($_POST['change_password'])) {
         // Set a success message and redirect to the profile page
         $_SESSION['success'] = "Password changed successfully!";
         // Display success message, if any
-if (isset($_SESSION['success'])) {
-    echo '<div class="alert alert-success" role="alert">' . $_SESSION['success'] . '</div>';
-    unset($_SESSION['success']);
-}
+        // Set a success message and redirect to the profile page
+        $_SESSION['success'] = "Password changed successfully!";
         header('Location: my_profile.php');
         exit();
     }
