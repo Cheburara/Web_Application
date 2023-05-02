@@ -85,7 +85,11 @@ $reservations = mysqli_fetch_all($result, MYSQLI_ASSOC);
                 <input type="text" name="phone" id="phone" value="" pattern="[0-9]{10}" required />
             </p> -->
            <p>
-                <button type="submit" name="edit" id="edit">Edit</button>
+           <a href="new_password.php">Change password </a>
+           <br>
+                <button type="submit" name="new_password" id="new_password">Edit</button>
+           
+
             </p>
         </form>
              <?php
@@ -113,4 +117,5 @@ $reservations = mysqli_fetch_all($result, MYSQLI_ASSOC);
 </footer>
 </body>
 </html>
+
 
