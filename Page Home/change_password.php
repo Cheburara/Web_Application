@@ -6,10 +6,12 @@ if(!isset($_SESSION['loggedIn']) || $_SESSION['loggedIn'] !== true) {
     header('Location: login.php');
     exit();
 }
+
 $errors = array();
 
 if (isset($_POST['change_password'])) {
     $user_id = $_SESSION['user_id'];
+    $old_password = $_POST['old_password'];
     $password = $_POST['new_password'];
     $confirm_password = $_POST['confirm_password'];
     
@@ -27,20 +29,43 @@ if (isset($_POST['change_password'])) {
     if ($password != $confirm_password) {
         $errors[] = "Passwords do not match";
     }
-    echo "<ul>";
-    foreach ($errors as $error) {
-        echo "<li>" . $error . "</li>";
-    }
-    echo "</ul>";
-   // If there are no errors, update the user's password in the database
-   if (empty($errors)) {
-    // Establish a database connection
+    
+    // Check if old password matches with the one stored in the database
     $link = mysqli_connect("localhost", "arroba", "BedolagA614", "db_arroba");
     if (!$link) {
         die("Connection failed: " . mysqli_connect_error());
     }
+    $query = "SELECT password FROM users WHERE id = '$user_id'";
+    $result = mysqli_query($link, $query);
+    $row = mysqli_fetch_assoc($result);
+    $stored_password = $row['password'];
+    mysqli_close($link);
+    
+    if (!password_verify($old_password, $stored_password)) {
+        $errors[] = "Old password is incorrect";
+    }
+    
+    // If there are no errors, update the user's password in the database
+    if (empty($errors)) {
+        // Establish a database connection
+        $link = mysqli_connect("localhost", "arroba", "BedolagA614", "db_arroba");
+        if (!$link) {
+            die("Connection failed: " . mysqli_connect_error());
+        }
+        
+        // Hash the new password and update it in the database
+        $hashed_password = password_hash($password, PASSWORD_DEFAULT);
+        $query = "UPDATE users SET password = '$hashed_password' WHERE id = '$user_id'";
+        mysqli_query($link, $query);
+        mysqli_close($link);
+        
         // Set a success message and redirect to the profile page
         $_SESSION['success'] = "Password changed successfully!";
+        // Display success message, if any
+if (isset($_SESSION['success'])) {
+    echo '<div class="alert alert-success" role="alert">' . $_SESSION['success'] . '</div>';
+    unset($_SESSION['success']);
+}
         header('Location: my_profile.php');
         exit();
     }
@@ -53,14 +78,4 @@ foreach ($errors as $error) {
 }
 echo "</ul>";
 
-// Display success message, if any
-if (isset($_SESSION['success'])) {
-    echo '<div class="alert alert-success" role="alert">' . $_SESSION['success'] . '</div>';
-    unset($_SESSION['success']);
-}
 ?>
-
-
-
-
-
