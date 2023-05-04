@@ -187,7 +187,6 @@
             $errors[] = "Invalid postal code format";
         }
 
-
         ?>
             <?php
             if (isset($_SESSION['reservation_sent']) && $_SESSION['reservation_sent']) {
