@@ -1,8 +1,15 @@
 <?php
-session_start();
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
 
-function sanitize_input($input): string
-{
+function sanitize_input($input) {
+    if (is_array($input)) {
+        foreach ($input as &$value) {
+            $value = sanitize_input($value);
+        }
+        return $input;
+    }
     return htmlspecialchars(stripslashes(trim($input)));
 }
 
@@ -11,7 +18,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST["submitReservation"]))
     $timehours = sanitize_input($_POST["timehour2"]);
     $services = sanitize_input($_POST["type"]);
     $address = sanitize_input($_POST["address"]);
-    $time2 = $_POST["day"] ?? array();
+    $days= sanitize_input(["day"] ?? array());
     $price = sanitize_input($_POST["garbage-price"]);
 
     // Validation rules
@@ -36,7 +43,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST["submitReservation"]))
         echo "Invalid address!<br>";
     }
 
-    if (count(array($time2)) > 2 || count(array($time2)) == 0) {
+    if (count(array($days)) > 2 || count(array($days)) == 0) {
         $isValid = false;
         echo "Invalid number of days selected!<br>";
     }
@@ -45,10 +52,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST["submitReservation"]))
     if ($isValid) {
         // Validation successful
         $_SESSION['reservationData'] = array(
-            'timehour' => $timehours,
-            'service' => $services,
-            'time2' => $time2,
-            'price' => $price
+            'timehour2' => $timehours,
+            'type' => $services,
+            'day' => $days,
+            'garbage-price' => $price
         );
         require_once "save_reservation2.php"; // Redirect to the next page
         exit();
