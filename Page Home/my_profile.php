@@ -1,385 +1,128 @@
-*{
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-    background-color: #24252a; 
-    
-  }
+<?php
+require_once('db-connection.php');
+session_start();
 
+// Check if the user is logged in
+if(!isset($_SESSION['loggedIn']) || $_SESSION['loggedIn'] !== true) {
+    header('Location: login.php');
+    exit();
+}
 
+// Get the session ID
+$session_id = session_id();
 
-body {
-    font-family: 'Work Sans', sans-serif;
-    font-size: 16px;
-    line-height: 1.5;
-    color: white;
-    background-color: #f5f5f5;
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
+// Connect to the database
+$link = mysqli_connect('localhost', 'ilshyn', 'Shin!40022', 'db_ilshyn');
+
+// Get the user's ID from the sessions table
+$query = "SELECT user_id FROM sessions WHERE session_id = '$session_id'";
+$result = mysqli_query($link, $query);
+$row = mysqli_fetch_assoc($result);
+$user_id = $row['user_id'];
+
+// Get the user's information from the users table
+$query = "SELECT username, email FROM users WHERE id = '$user_id'";
+$result = mysqli_query($link, $query);
+$row = mysqli_fetch_assoc($result);
+$username = $row['username'];
+$email = $row['email'];
+
+// Get the user's address from the reservations table
+$query = "SELECT address FROM reservations WHERE user_id = '$user_id' ORDER BY id DESC LIMIT 1";
+$result = mysqli_query($link, $query);
+$reservations = mysqli_fetch_all($result, MYSQLI_ASSOC);
+
+?>
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="my_profile.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css"  />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Questrial&family=Work+Sans&display=swap" rel="stylesheet">
+    <title>My Profile</title>
+</head>
+<body>
+<?php 
+       require_once('header.php'); 
+        ?>
+<div class="container">
+    <div class="overlay">
+        <h1>My Profile</h1>
+        <form action="edit.php" method="POST" id="profileEdit" name="profileEdit">
+            <input type="hidden" name="session_id" value="<?php echo session_id(); ?>">
+            <p>
+                <label>Email:</label>
+                <input type="text" name="email" id="email" value="<?php echo $email; ?> " required readonly/>
+            </p>
+            <p>
+                <label>Name:</label>
+                <input type="text" name="name" id="name" value="<?php echo $username; ?>"  required readonly/>
+            <p>
+            <?php
+    if (!empty($reservations)) {
+?>
+        <p>
+            <label>Address:</label>
+            <input type="text" name="address" id="address" value="<?php echo $reservations[0]['address']; ?>" required readonly/>
+        </p>
+<?php
+    } else {
+?>
+        <p>
+            <label>Address:</label>
+            <input type="text" name="address" id="address" placeholder="None of orders are done yet" required />
+        </p>
+<?php
     }
-    .container{
-      width: 100;
-      height: 100vh;
-      background-image: url(images/homebg.jpeg);
-      background-position: center;
-      background-size: cover;
-      background-repeat: no-repeat;
-    }
-
-    button{
-        color: rgba(0, 136,168,169,1);
-        padding: 10px 25px;
-        background: transparent;
-        border: 1px solid #fff;
-        border-radius: 20px;
-        outline: none;
-        cursor: pointer; 
-    }
-    
-    button:hover{
-    background-color:#0088a9 ;
-    }
-    
-      
-      h1 {
-        text-align: center;
-        margin-bottom: 20px;
-      }
-      p {
-        margin-bottom: 10px;
-        font-size: 20px;
-      }
-      label {
-        display: inline-block;
-        width: 110px;
-        font-weight: bold;
-      }
-      input[type="text"] {
-        width: 250px;
-        margin-bottom: 10px;
-        color:white;
-      }
-      
-    
-    .text {
-      color: white;
-      font-family: 'Questrial', sans-serif;
-    }
-
-    .overlay{
-      position: relative;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      padding: 20px;
-      background-color: rgba(0, 0, 0, 0.7);
-      color: #fff;
-      font-size: 24px;
-      font-weight: bold;
-      text-align: center;
-      text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
-    }
-    .change label {
-        display: inline-block;
-        width: 110px;
-        font-weight: bold;
-        margin-right: 10px;
-    }
-    .change input{
-        color:white;
-        margin-left: 10px;
-    }
-    
-
-     /* стилистика для панели навигации */
-
-     li, a, button{
-      font-family: 'Work Sans', sans-serif;
-      font-weight: 500;
-      font-size: 16px;
-      color:#fbfcfd;
-      text-decoration: none;
-  }
-
-  header{
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 30px 10%;
-      min-height: 100px;
-  }
-  
-  .nav__links {
-      list-style: none;
-  }
-  
-  .nav__links li{
-      display: inline-block;
-      padding: 0px 20px;
-  }
-  
-  
-  .nav__links li a:hover{
-      color: #0088a9
-  
-  }
-
-  button{
-        color: rgba(0, 136,168,169,1);
-        padding: 10px 25px;
-        background: transparent;
-        border: 1px solid #fff;
-        border-radius: 20px;
-        outline: none;
-        cursor: pointer; 
-  }
-
-  button:hover{
-    background-color:#0088a9 ;
-  }
-
-  /* стилистика для панели футера */
-*{
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-    background-color: #24252a;
-
+?>
+            </p>
+           <p>
+           <a href="new_password.php">Change password </a>
+           <div id="success-message">
+           <script>
+            // Check if there is a success message in the session
+            if (sessionStorage.getItem('success') !== null) {
+            // Get the message and display it in the success message div
+            var successMessage = sessionStorage.getItem('success');
+            var successDiv = document.getElementById('success-message');
+            successDiv.innerHTML = '<div class="alert alert-success" role="alert">' + successMessage + '</div>';
+            // Remove the success message from the session
+            sessionStorage.removeItem('success');
 }
+</script>
+           </div>
+           <br>
+            <!-- <button type="submit" name="edit" id="edit">Edit</button> -->
+            </p>
+        </form>
+             <?php
+            // Retrieve user's order history from database and display it
+            include('order_history.php');
+             ?>
+            </p>
+           <p>
+    </div>
+</div>
+<footer>
+    <div class="footer-content">
+        <h3>EcoClean</h3>
+        <p>Make a difference together</p>
+        <ul class="socials">
+            <li><a href="#"><i class="fa-brands fa-facebook"></i></a></li>
+            <li><a href="#"><i class="fa-brands fa-instagram"></i></a></li>
+            <li><a href="#"><i class="fa-brands fa-twitter"></i></a></li>
+            <li><a href="#"><i class="fa-brands fa-telegram"></i></a></li>
+        </ul>
+    </div>
+    <div class="footer-bottom">
+        <p>Copyright</p>
+    </div>
+</footer>
+</body>
+</html>
 
 
-
-
-.text {
-    color: white;
-    font-family: 'Questrial', sans-serif;
-}
-
-/* стилистика для панели навигации */
-
-li, a, button{
-    font-family: 'Work Sans', sans-serif;
-    font-weight: 500;
-    font-size: 16px;
-    color:#fbfcfd;
-    text-decoration: none;
-}
-
-header{
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 30px 10%;
-}
-
-.nav__links {
-    list-style: none;
-}
-
-.nav__links li{
-    display: inline-block;
-    padding: 0px 20px;
-}
-
-.nav__links li a{
-    transition: all 0.3s ease 0s;
-
-}
-
-.nav__links li a:hover{
-    color: #0088a9
-
-}
-
-button{
-    color: rgba(0, 136,168,169,1);
-    padding: 10px 25px;
-    background: transparent;
-    border: 1px solid #fff;
-    border-radius: 20px;
-    outline: none;
-    cursor: pointer;
-    transition: all 0.3s ease 0s;
-}
-
-button:hover{
-    background-color:#0088a9 ;
-}
-
-/* стилистика для основной части*/
-
-.container{
-    width: 100;
-    height: 100vh;
-    background-position: center;
-    background-size: cover;
-    background-repeat: no-repeat;
-} */
-
-.overflow{
-    display: flex;
-    height: 88%;
-    align-items: center;
-}
-
-.overlay {
-    position: absolute;
-    top: 55%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    padding: 15px;
-    background-color: rgba(0, 0, 0, 0.7);
-    color: #fff;
-    font-size: 24px;
-    font-weight: bold;
-    text-align: center;
-    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
-}
-
-.overlay h1 {
-    color: #fff;
-    font-size: 60px;
-    font-family: 'Questrial', sans-serif;
-    font-family: 'Work Sans', sans-serif;
-}
-
-.overplay p{
-    display: block;
-    margin-bottom: 10px;
-    display: inline-block;
-        width: 110px;
-        font-weight: bold;
-}
-
-
-
-.order-history-table {
-    width: 100%;
-        border-collapse: separate;
-        border-spacing: 50px;
-       }
-  tr{
-    font-size: 18px;
-  }
-  td{
-    font-size: 12px;
-  }
-
-/* стилистика для панели футера */
-
-footer{
-    position: relative;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    background: #111;
-    height: auto;
-    width: 100vw;
-    font-family: "Open Sans";
-    padding-top: 40px;
-    color: #fff;
-}
-.footer-content{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-    text-align: center;
-}
-.footer-content h3{
-    font-size: 1.8rem;
-    font-weight: 400;
-    text-transform: capitalize;
-    line-height: 3rem;
-    font-family: 'Questrial', sans-serif;
-    font-family: 'Work Sans', sans-serif;
-}
-.footer-content p{
-    max-width: 500px;
-    margin: 10px auto;
-    line-height: 28px;
-    font-size: 14px;
-    font-family: 'Questrial', sans-serif;
-    font-family: 'Work Sans', sans-serif;
-}
-.socials{
-    list-style: none;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin: 1rem 0 3rem 0;
-}
-.socials li{
-    margin: 0 10px;
-}
-.socials a{
-    text-decoration: none;
-    color: #fff;
-}
-.socials a i{
-    font-size: 1.1rem;
-    transition: color .4s ease;
-
-}
-.socials a:hover i{
-    color: #0088a9 ;
-}
-
-.footer-bottom{
-    background: #000;
-    width: 100vw;
-    padding: 20px 0;
-    text-align: center;
-}
-.footer-bottom p{
-    font-size: 14px;
-    word-spacing: 2px;
-    text-transform: capitalize;
-}
-.footer-bottom span{
-    text-transform: uppercase;
-    opacity: .4;
-    font-weight: 200;
-}
-/*
-    /* Стилистика для всплывающего меню */
-
-.dropbtn {
-    color: #ffffff;
-    padding: 16px;
-    font-size: 16px;
-    border: none;
-    
-}
-
-.dropdown {
-    position: relative  ; 
-    display: inline-block;
-}
-
-.dropdown-content {
-    display: none;
-    position: absolute;
-    background-color: #f1f1f100;
-    min-width: 100px;
-    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-    z-index: 1;
-}
-
-.dropdown-content a {
-    color: rgb(255, 255, 255);
-    padding: 12px 16px;
-    text-decoration: none;
-    display: block;
-}
-
-.dropdown-content a:hover {color: #0088a9;}
-
-.dropdown:hover .dropdown-content {display: block;}
-
-.dropdown:hover .dropbtn {background-color: #00000000;}
-
-.dropbtn:hover {
-    color: #0088a9 ;
-}
