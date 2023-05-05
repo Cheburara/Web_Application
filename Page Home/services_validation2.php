@@ -23,7 +23,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST["submitReservation"]))
 
     // Validation rules
     $isValid = true;
-    $timehourss = array("9:00-12:00", "15:00-19:00", "9:00-20:00");
+    $timehourss = array("9:00-12:00", "13:00-16:00", "17:00-20:00");
     if (empty($timehours) || !in_array($timehours, $timehourss)) {
         $isValid = false;
         echo "Invalid time slot!<br>";
