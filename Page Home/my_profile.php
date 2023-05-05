@@ -12,7 +12,7 @@ if(!isset($_SESSION['loggedIn']) || $_SESSION['loggedIn'] !== true) {
 $session_id = session_id();
 
 // Connect to the database
-$link = mysqli_connect('localhost', 'ilshyn', 'Shin!40022', 'db_ilshyn');
+$link = mysqli_connect('anysql.itcollege.ee', 'ICS0008_WT_23', '134fdaeb6fe1', 'ICS0008_23');
 
 // Get the user's ID from the sessions table
 $query = "SELECT user_id FROM sessions WHERE session_id = '$session_id'";
