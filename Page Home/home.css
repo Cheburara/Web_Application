@@ -5,7 +5,10 @@
     background-color: #24252a; 
     
 }
-
+body {
+    overflow-x: hidden;
+  }
+  
   
 
     
@@ -25,11 +28,14 @@
   }
   
   header{
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 30px 10%;
-  }
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 30px 10%;
+    min-height: 80px; /* add this line */
+}
+
+
   
   .nav__links {
       list-style: none;
@@ -66,6 +72,7 @@
   }
 
   /* стилистика для основной части*/
+  
 
    .container{
     width: 100;
@@ -84,7 +91,7 @@
 
 .overlay {
   position: absolute;
-  top: 55%;
+  top: 60%;
   left: 50%;
   transform: translate(-50%, -50%);
   padding: 15px;
@@ -218,4 +225,14 @@ footer{
 
 .dropbtn:hover {
     color: #0088a9 ;
+}
+
+
+#text span {
+    opacity: 0;
+    transition: opacity 1s ease-in-out;
+}
+
+#text span.fade {
+    opacity: 1;
 }
