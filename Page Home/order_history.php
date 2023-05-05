@@ -9,7 +9,7 @@ if(!isset($_SESSION['loggedIn']) || $_SESSION['loggedIn'] !== true) {
 }
 
 // Connect to the database
-$link = mysqli_connect('anysql.itcollege.ee', 'ICS0008_WT_23', '134fdaeb6fe1', 'ICS0008_23');
+$link = mysqli_connect('localhost', 'ilshyn', 'Shin!40022', 'db_ilshyn');
 
 // Get the user's ID from the users table
 $email = $_SESSION['email'];
@@ -32,14 +32,18 @@ if(mysqli_num_rows($result) == 0) {
 } else {
     // Display the table with order history
     echo '<table>';
-    echo '<tr><th>Time</th><th>Data</th><th>Service</th><th>Address</th><th>Price</th></tr>';
+    echo '<tr><th>Time</th><th>Date/Days</th><th>Type</th><th>Address</th><th>Price</th></tr>';
     while ($row = mysqli_fetch_assoc($result)) {
         echo '<tr>';
         echo '<td>' . $row['timehour'] . '</td>';
-        echo '<td>' .  date('Y-m-d', strtotime($row['time2'])) . '</td>';
+        if ($row['time2'] == null) {
+            echo '<td>' . $row['selected_days'] . '</td>';
+        } else {
+            echo '<td>' .  date('Y-m-d', strtotime($row['time2'])) . '</td>';
+        }
         echo '<td>' . $row['service'] . '</td>';
         echo '<td>' . $row['address'] . '</td>';
-        echo '<td>' . $row['price'] . '</td>';
+        echo '<td>' . $row['price']  . '€' . '</td>';
         echo '</tr>';
     }
     echo '</table>';
