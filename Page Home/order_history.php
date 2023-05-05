@@ -32,18 +32,14 @@ if(mysqli_num_rows($result) == 0) {
 } else {
     // Display the table with order history
     echo '<table>';
-    echo '<tr><th>Time</th><th>Date/Days</th><th>Type</th><th>Address</th><th>Price</th></tr>';
+    echo '<tr><th>Time</th><th>Data</th><th>Service</th><th>Address</th><th>Price</th></tr>';
     while ($row = mysqli_fetch_assoc($result)) {
         echo '<tr>';
         echo '<td>' . $row['timehour'] . '</td>';
-        if ($row['time2'] == null) {
-            echo '<td>' . $row['selected_days'] . '</td>';
-        } else {
-            echo '<td>' .  date('Y-m-d', strtotime($row['time2'])) . '</td>';
-        }
+        echo '<td>' .  date('Y-m-d', strtotime($row['time2'])) . '</td>';
         echo '<td>' . $row['service'] . '</td>';
         echo '<td>' . $row['address'] . '</td>';
-        echo '<td>' . $row['price']  . '€' . '</td>';
+        echo '<td>' . $row['price'] . '</td>';
         echo '</tr>';
     }
     echo '</table>';
@@ -65,3 +61,4 @@ echo '  }';
 echo '}';
 echo '</script>';
 ?>
+
