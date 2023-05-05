@@ -51,10 +51,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST["submitReservation"]))
         $isValid = false;
         echo "Invalid address!<br>";
     } 
-    if (!is_numeric($price) || $price <= 0) {
-        $isValid = false;
-        echo "Invalid price!<br>";
-    }
 
     if($isValid){
         // Validation successful
