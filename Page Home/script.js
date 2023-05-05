@@ -105,7 +105,7 @@ prevButtons2.forEach((button) => {
 
 showStep2(0); // show the first step of the second form
 
-// aga
+// Makes only 1 checkbox usable
 
 const checkboxes = document.querySelectorAll('input[type="checkbox"]');
 let checkedCount = 0;
@@ -114,7 +114,7 @@ checkboxes.forEach((checkbox) => {
     checkbox.addEventListener('change', () => {
         if (checkbox.checked) {
             checkedCount++;
-            if (checkedCount > 2) {
+            if (checkedCount > 1) {
                 checkbox.checked = false;
                 checkedCount--;
             }
