@@ -1,5 +1,7 @@
 <?php
-
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
 
 function sanitize_input($input) {
     if (is_array($input)) {
@@ -18,31 +20,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST["submitReservation"]))
     $address = sanitize_input($_POST["address"]);
     $days= sanitize_input(["day"] ?? array());
     $price = sanitize_input($_POST["garbage-price"]);
-    $address = sanitize_input($_POST["address"]);
-    $postalcode = sanitize_input($_POST["postcode"]);
 
     // Validation rules
     $isValid = true;
-    if(empty($address)) {
-        $isValid = false;
-        echo "Invalid address!";
-    } else if (!preg_match('/^[\p{L}0-9_ \-\',.;:]+(?:, [\p{L}0-9_ \-\',.;:]+){2,3}$/u', $address)) {
-        $isValid = false;
-        echo "Invalid address!";
-    }
-    
-    
-    
-    if(empty($postalcode)) {
-        $isValid = false;
-        echo "Invalid code!";
-    } else if (!preg_match('/^[0-9]{1,8}$/', $postalcode)){
-        $isValid = false;
-        echo "Invalid code!";
-    }
-    
-    
-    $timehourss = array("9:00-12:00", "13:00-16:00", "17:00-20:00");
+    $timehourss = array("9:00-12:00", "15:00-19:00", "9:00-20:00");
     if (empty($timehours) || !in_array($timehours, $timehourss)) {
         $isValid = false;
         echo "Invalid time slot!<br>";
@@ -54,7 +35,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST["submitReservation"]))
         echo "Invalid service!<br>";
     }
 
-    
+    if (empty($address)) {
+        $isValid = false;
+        echo "Invalid address!<br>";
+    } else if (!preg_match("/^[a-zA-Z0-9\säöüõÄÖÜÕ.,#-]+$/u", $address)) {
+        $isValid = false;
+        echo "Invalid address!<br>";
+    }
+
     if (count(array($days)) > 2 || count(array($days)) == 0) {
         $isValid = false;
         echo "Invalid number of days selected!<br>";
