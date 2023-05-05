@@ -11,7 +11,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST["submitReservation"]))
     $price = sanitize_input($_POST["price"]);
 
     try {
-        $conn = new PDO("mysql:host=localhost;dbname=db_arroba", 'arroba', 'BedolagA614');
+        $conn = new PDO("mysql:host=anysql.itcollege.ee;dbname=ICS0008_23, 'ICS0008_WT_23', '134fdaeb6fe1');
         $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     } catch(PDOException $e) {
         echo "Connection failed: " . $e->getMessage();
