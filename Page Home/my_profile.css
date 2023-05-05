@@ -48,7 +48,7 @@ body {
       }
       p {
         margin-bottom: 10px;
-        font-size: 22px;
+        font-size: 20px;
       }
       label {
         display: inline-block;
@@ -60,6 +60,7 @@ body {
         margin-bottom: 10px;
         color:white;
       }
+      
     
     .text {
       color: white;
@@ -79,7 +80,17 @@ body {
       text-align: center;
       text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
     }
-
+    .change label {
+        display: inline-block;
+        width: 110px;
+        font-weight: bold;
+        margin-right: 10px;
+    }
+    .change input{
+        color:white;
+        margin-left: 10px;
+    }
+    
 
      /* стилистика для панели навигации */
 
@@ -232,6 +243,28 @@ button:hover{
     font-family: 'Questrial', sans-serif;
     font-family: 'Work Sans', sans-serif;
 }
+
+.overplay p{
+    display: block;
+    margin-bottom: 10px;
+    display: inline-block;
+        width: 110px;
+        font-weight: bold;
+}
+
+
+
+.order-history-table {
+    width: 100%;
+        border-collapse: separate;
+        border-spacing: 50px;
+       }
+  tr{
+    font-size: 18px;
+  }
+  td{
+    font-size: 12px;
+  }
 
 /* стилистика для панели футера */
 
