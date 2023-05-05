@@ -12,7 +12,7 @@ if(!isset($_SESSION['loggedIn']) || $_SESSION['loggedIn'] !== true) {
 $session_id = session_id();
 
 // Connect to the database
-$link = mysqli_connect('anysql.itcollege.ee', 'ICS0008_WT_23', '134fdaeb6fe1', 'ICS0008_23');
+$link = mysqli_connect('localhost', 'ilshyn', 'Shin!40022', 'db_ilshyn');
 
 // Get the user's ID from the sessions table
 $query = "SELECT user_id FROM sessions WHERE session_id = '$session_id'";
@@ -56,18 +56,18 @@ $reservations = mysqli_fetch_all($result, MYSQLI_ASSOC);
             <input type="hidden" name="session_id" value="<?php echo session_id(); ?>">
             <p>
                 <label>Email:</label>
-                <input type="text" name="email" id="email" value="<?php echo $email; ?>" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" required/>
+                <input type="text" name="email" id="email" value="<?php echo $email; ?> " required readonly/>
             </p>
             <p>
                 <label>Name:</label>
-                <input type="text" name="name" id="name" value="<?php echo $username; ?>"  pattern="[A-Za-z' -]+" required/>
+                <input type="text" name="name" id="name" value="<?php echo $username; ?>"  required readonly/>
             <p>
             <?php
     if (!empty($reservations)) {
 ?>
         <p>
             <label>Address:</label>
-            <input type="text" name="address" id="address" value="<?php echo $reservations[0]['address']; ?>" required />
+            <input type="text" name="address" id="address" value="<?php echo $reservations[0]['address']; ?>" required readonly/>
         </p>
 <?php
     } else {
