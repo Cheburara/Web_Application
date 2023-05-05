@@ -1,8 +1,39 @@
 <?php
+require_once('db-connection.php');
 session_start();
-$email = isset($_SESSION['email']) ? $_SESSION['email'] : '';
-$username = isset($_SESSION['username']) ? $_SESSION['username'] : '';
+
+// Check if the user is logged in
+if(!isset($_SESSION['loggedIn']) || $_SESSION['loggedIn'] !== true) {
+    header('Location: login.php');
+    exit();
+}
+
+// Get the session ID
+$session_id = session_id();
+
+// Connect to the database
+$link = mysqli_connect('localhost', 'ilshyn', 'Shin!40022', 'db_ilshyn');
+
+// Get the user's ID from the sessions table
+$query = "SELECT user_id FROM sessions WHERE session_id = '$session_id'";
+$result = mysqli_query($link, $query);
+$row = mysqli_fetch_assoc($result);
+$user_id = $row['user_id'];
+
+// Get the user's information from the users table
+$query = "SELECT username, email FROM users WHERE id = '$user_id'";
+$result = mysqli_query($link, $query);
+$row = mysqli_fetch_assoc($result);
+$username = $row['username'];
+$email = $row['email'];
+
+// Get the user's address from the reservations table
+$query = "SELECT address FROM reservations WHERE user_id = '$user_id' ORDER BY id DESC LIMIT 1";
+$result = mysqli_query($link, $query);
+$reservations = mysqli_fetch_all($result, MYSQLI_ASSOC);
+
 ?>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -15,25 +46,9 @@ $username = isset($_SESSION['username']) ? $_SESSION['username'] : '';
     <title>My Profile</title>
 </head>
 <body>
-<header>
-    <img class="logo" src="images/logoR.png" alt="logo" width="100px" height="100px">
-    <nav>
-        <ul class="nav__links">
-            <li><a href="index.php">HOME</a></li>
-            <li><a href="services.php">SERVICES</a></li>
-            <li><a href="locations.html">LOCATIONS</a></li>
-            <li><a href="my_profile.php">MY PROFILE</a></li>
-            <div class="dropdown">
-                <button class="dropbtn">ABOUT US</button>
-                <div class="dropdown-content">
-                    <a href="team.html">TEAM</a>
-                    <a href="history.html">HISTORY</a>
-                </div>
-            </div>
-        </ul>
-    </nav>
-    <a class="cta" href="form.html"><button>Sign</button></a>
-</header>
+<?php 
+       require_once('header.php'); 
+        ?>
 <div class="container">
     <div class="overlay">
         <h1>My Profile</h1>
@@ -41,19 +56,55 @@ $username = isset($_SESSION['username']) ? $_SESSION['username'] : '';
             <input type="hidden" name="session_id" value="<?php echo session_id(); ?>">
             <p>
                 <label>Email:</label>
-                <input type="text" name="email" id="email" value="<?php echo $email; ?>" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" required/>
+                <input type="text" name="email" id="email" value="<?php echo $email; ?> " required readonly/>
             </p>
             <p>
                 <label>Name:</label>
-                <input type="text" name="name" id="name" value="<?php echo $username; ?>"  pattern="[A-Za-z' -]+" required/>
+                <input type="text" name="name" id="name" value="<?php echo $username; ?>"  required readonly/>
             <p>
-                <label>Address:</label>
-                <input type="text" name="address" id="address" required />
+            <?php
+    if (!empty($reservations)) {
+?>
+        <p>
+            <label>Address:</label>
+            <input type="text" name="address" id="address" value="<?php echo $reservations[0]['address']; ?>" required readonly/>
+        </p>
+<?php
+    } else {
+?>
+        <p>
+            <label>Address:</label>
+            <input type="text" name="address" id="address" placeholder="None of orders are done yet" required />
+        </p>
+<?php
+    }
+?>
             </p>
-            <p>
-                <button type="submit" name="edit" id="edit">Edit</button>
+           <p>
+           <a href="new_password.php">Change password </a>
+           <div id="success-message">
+           <script>
+            // Check if there is a success message in the session
+            if (sessionStorage.getItem('success') !== null) {
+            // Get the message and display it in the success message div
+            var successMessage = sessionStorage.getItem('success');
+            var successDiv = document.getElementById('success-message');
+            successDiv.innerHTML = '<div class="alert alert-success" role="alert">' + successMessage + '</div>';
+            // Remove the success message from the session
+            sessionStorage.removeItem('success');
+}
+</script>
+           </div>
+           <br>
+            <!-- <button type="submit" name="edit" id="edit">Edit</button> -->
             </p>
         </form>
+             <?php
+            // Retrieve user's order history from database and display it
+            include('order_history.php');
+             ?>
+            </p>
+           <p>
     </div>
 </div>
 <footer>
@@ -73,4 +124,5 @@ $username = isset($_SESSION['username']) ? $_SESSION['username'] : '';
 </footer>
 </body>
 </html>
+
 
