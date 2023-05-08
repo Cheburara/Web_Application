@@ -9,9 +9,9 @@ if(!isset($_SESSION['loggedIn']) || $_SESSION['loggedIn'] !== true) {
 }
 
 // Connect to the database
-$link = mysqli_connect('anysql.itcollege.ee', 'ICS0008_WT_23', '6134fdaeb6fe1', 'ICS0008_23);
+$link = mysqli_connect('anysql.itcollege.ee', 'ICS0008_WT_23', '6134fdaeb6fe1', 'ICS0008_23');
 
-// Get the user's ID from the users table
+// Get the users ID from the users table
 $email = $_SESSION['email'];
 $query = "SELECT id FROM users WHERE email = '$email'";
 $result = mysqli_query($link, $query);
