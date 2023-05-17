@@ -12,7 +12,11 @@ if(isset($_POST['submit'])) {
     $email = $_POST['email'];
     $password = $_POST['password'];
     $confirm_password = $_POST['confirm_password'];
-
+    
+    $_SESSION['username'] = $username;
+    $_SESSION['email'] = $email;
+    $_SESSION['password'] = $password;
+    $_SESSION['confirm_password'] = $confirm_password;
     // Validate the password format
     if (!preg_match('/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^a-zA-Z0-9]).{8,}$/',$password)) {
         $errors[] = 'Invalid password format. Password must be at least 8 characters long and contain at least one uppercase letter, one lowercase letter, one number, and one special character.';
