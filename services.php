@@ -1,4 +1,4 @@
-    <?php
+<?php
     require_once('db-connection.php');
     ?>
     <?php
@@ -9,8 +9,6 @@
      <html lang="en">
       <head>
         <meta charset="utf-8">
-        <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places"></script>
-
         <link rel="stylesheet" href="services.css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css"  />
             <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -113,20 +111,25 @@
       </head>
 
       <body>
-        <div class="container">
-        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBjVsfVaKjQQbVIBR-O_5ZQlbZnYSiojnc&callback=initMap&libraries=places&language=EN"></script>
-            <div class="overlay">
+      <div class="container">
+    <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&callback=initMap&libraries=places&language=EN"></script>
+    <div class="form-wrapper">
+        <div class="content-container">
+            <div class="text-container">
                 <h1>Start Service</h1>
                 <h2>Waste Management Services</h2>
                 <h3>Waste Connections offers waste management services for your home or business.<br>
                     From garbage collection to recycling, we will handle it. We take care of your business waste with reliable trash pickup and dumpster rentals.</h3>
             </div>
-
-            <div class="form-wrapper">
-            <div class="tab-container">
-                <button class="tablinks" onclick="toggle_visibility('garbage-form'); toggleActive(this)">Scheduled</button>
-                <button class="tablinks" onclick="toggle_visibility('form2'); toggleActive(this)">On-demand</button>
+            <div class="button-container">
+                <div class="tab-container">
+                    <button class="tablinks" onclick="toggle_visibility('garbage-form'); toggleActive(this)">Scheduled</button>
+                    <button class="tablinks" onclick="toggle_visibility('form2'); toggleActive(this)">On-demand</button>
+                </div>
             </div>
+        </div>
+    </div>
+</div>
 
 
                 <form id="garbage-form" action="services_validation2.php" method="post" style="display: none">
@@ -200,12 +203,7 @@ function validateDays() {
                             <div class="form-step" id="step-1">
                                 <label for="days">Enter your info:</label><br><br>
                                 <label for="address"><br>Address:</label><br>
-                                <input type="text" id="address-input2" name="address" placeholder="Enter your address">
-<script>
-  // Initialize the autocomplete functionality
-  var autocomplete = new google.maps.places.Autocomplete(document.getElementById('address-input2'));
-</script>
-
+                                <label for="address-input"></label><input type="text" id="address-input" name="address" placeholder="Enter your address">
                                 <label for="postcode"><br>Postcode:</label><br>
                                 <input type="text" id="postcode" name="postcode" required><br><br>
                                 <div class="next-button"><button class="next-btn" type="button">Next</button><br></div>
@@ -214,38 +212,9 @@ function validateDays() {
                             <div class="form-step" id="step-2">
                                 <label for="timehour"><font size="+1">Select time:</font></label><br><br>
                                 <label for="time2">Service <day></day>:</label>
-                                <?php
-$minDate = date('Y-m-d', strtotime('+1 day'));
-$maxDate = date('Y-m-d', strtotime('+7 months'));
-
-// Check if the minimum date falls on a Sunday
-if (date('N', strtotime($minDate)) == 7) {
-    $minDate = date('Y-m-d', strtotime($minDate . ' +1 day')); // Add one more day to skip Sunday
-}
-
-// Check if the maximum date falls on a Saturday
-if (date('N', strtotime($maxDate)) == 6) {
-    $maxDate = date('Y-m-d', strtotime($maxDate . ' -1 day')); // Subtract one day to skip Saturday
-}
-
-?>
-
-<input type="date" name="time2" id="time2" class="time2" 
-       required min="<?php echo $minDate; ?>" 
-       max="<?php echo $maxDate; ?>" 
-       onchange="validateDate(this)"><br><br>
-
-<script>
-function validateDate(input) {
-  const selectedDate = new Date(input.value);
-  const dayOfWeek = selectedDate.getDay();
-  if (dayOfWeek === 0 || dayOfWeek === 6) { // 0 is Sunday, 6 is Saturday
-    alert('Please select a work day.');
-    input.value = '';
-  }
-}
-</script>
-
+                                <input type="date" name="time2" id="time2" class="time2" 
+       required min="<?php echo date('Y-m-d', strtotime('+1 day')); ?>" 
+       max="<?php echo date('Y-m-d', strtotime('+7 months')); ?>"><br><br>
                                 <input type="radio" id="9:00-12:00" name="timehour" value="9:00-12:00" required><label for="9:00-12:00">9:00-12:00</label>
                                 <br>
                                 <input type="radio" id="13:00-16:00" name="timehour" value="13:00-16:00" required><label for="13:00-16:00">13:00-16:00</label>
@@ -334,9 +303,7 @@ function validateDate(input) {
                         };
                         var autocomplete = new google.maps.places.Autocomplete(input, options);
 
-                        // Get the selected options
-var address2 = document.getElementById('address-input2').value;
-
+                        var input = document.getElementById('address-input2');
                         var options = {
                             componentRestrictions: { country: 'ee' }
                         };
