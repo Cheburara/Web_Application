@@ -129,7 +129,6 @@
             </div>
         </div>
     </div>
-</div>
 
 
                 <form id="garbage-form" action="services_validation2.php" method="post" style="display: none">
@@ -280,6 +279,7 @@ function validateDays() {
                 </div>
             </div>
         </form>
+      </div>
       </div>
 
         <footer>
