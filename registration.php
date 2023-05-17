@@ -1,3 +1,12 @@
+<?php 
+session_start(); // Start the session
+
+// Retrieve the variables from the session
+$username = isset($_SESSION['username']) ? $_SESSION['username'] : '';
+$email = isset($_SESSION['email']) ? $_SESSION['email'] : '';
+$password = isset($_SESSION['password']) ? $_SESSION['password'] : '';
+$confirm_password = isset($_SESSION['confirm_password']) ? $_SESSION['confirm_password'] : '';
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -20,24 +29,25 @@
                     <br>
                     <div class="inputbox">
                         <i class="fa fa-user" aria-hidden="true"></i>
-                        <input type="username" name="username" required>
+                        <input type="text" name="username" value="<?php echo isset($_SESSION['username']) ? htmlspecialchars($_SESSION['username']) : ''; ?>" required>
                         <label for="#">Name</label>
-                    </div>
-                    <div class="inputbox">
+                        </div>
+                        <div class="inputbox">
                         <i class="fa-regular fa-envelope"></i>
-                        <input type="email" name="email" required>
+                        <input type="email" name="email" value="<?php echo isset($_SESSION['email']) ? htmlspecialchars($_SESSION['email']) : ''; ?>" required>
                         <label for="#">Email</label>
-                    </div>
-                    <div class="inputbox">
+                        </div>
+                        <div class="inputbox">
                         <i class="fa-solid fa-lock"></i>
                         <input type="password" name="password" required>
                         <label for="#">Password</label>
-                    </div>
-                    <div class="inputbox">
+                        </div>
+                        <div class="inputbox">
                         <i class="fa-solid fa-lock"></i>
                         <input type="password" name="confirm_password" required>
                         <label for="#">Confirmed Password</label>
-                    </div>
+                        </div>
+
                     <br>
                     <button name="submit">Register</button>
                     <div class="register">
