@@ -42,7 +42,7 @@ require_once('header.php');
                     </div>
                     <div class="forget">
                         <label for="forget"><input type="checkbox">Remember Me</label>
-                        <a href="confirm_password">Forget Password</a>
+                        <a href="confirm_password.html">Forget Password</a>
                     </div>
                     <button name="submit">Log in</button>
                     <div class="register">
