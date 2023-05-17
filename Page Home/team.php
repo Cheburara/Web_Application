@@ -35,8 +35,8 @@ session_start();
                 </section>
             
                 <section>
-                    <h2>Emily Brown - Customer Service Representative</h2>
-                    <p>Emily is one of our customer service representatives. She is responsible for answering phone calls, responding to emails, and assisting our clients with any questions or concerns they may have. Emily has been with our company for 2 years and always goes above and beyond to provide exceptional customer service.</p>
+                    <h2>Oleg - Customer Service Representative</h2>
+                    <p>Oleg is one of our customer service representatives. He is responsible for answering phone calls, responding to emails, and assisting our clients with any questions or concerns they may have. Oleg has been with our company for 2 years and always goes above and beyond to provide exceptional customer service.</p>
                 </section>
             </main>
 
