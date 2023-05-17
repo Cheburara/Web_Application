@@ -3,6 +3,19 @@
     ?>
     <?php
     session_start();
+    $conn = new PDO("mysql:host=anysql.itcollege.ee;dbname=ICS0008_3", 'ICS0008_WT_23', '134fdaeb6fe1');
+    $query = "SELECT id FROM users";
+    $stmt = $conn->prepare($query);
+    $stmt->execute();
+    $user_id = $stmt->fetchColumn();
+    $_SESSION['user_id'] = $user_id;
+    // Check if the user is logged in
+    if (!isset($_SESSION['user_id'])) {
+        // Redirect to the login page
+        header('Location: login.php');
+        exit;
+    }
+    require_once('header.php');
     // Check if the user is logged in
 if (!isset($_SESSION['user_id'])) {
     // Redirect to the login page or display an error message
