@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -12,8 +11,20 @@
 <body> 
     <?php 
        session_start();
-       require_once('header.php'); 
-        ?>
+
+// Check if the login form was submitted
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    // Perform login validation here (e.g., check email and password against a database)
+    // If the login is successful, set the session variable 'loggedIn' to true
+    $_SESSION['loggedIn'] = true;
+
+    // Redirect to a logged-in page or perform other actions
+    header('Location: dashboard.php');
+    exit();
+}
+
+require_once('header.php');
+?>
     <section>
         <div class="form-box">
             <div class="form-value">
