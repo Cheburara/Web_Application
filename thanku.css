@@ -45,8 +45,38 @@
     text-decoration: underline;
 }
 
+.error-list {
+    color: whitesmoke;
+    text-align: center;
+    font-size: 24px;
+    font-family: 'Work Sans', sans-serif;
+    position: absolute;
+    top: calc(50% + 60px);
+    left: 50%;
+    transform: translateX(-50%);
+    margin-top: 20px;
+}
 
+.error-list li {
+    color: whitesmoke;
+    text-align: center;
+    font-size: 24px;
+    font-family: 'Work Sans', sans-serif;
+    position: absolute;
+    top: calc(50% + 60px);
+    left: 50%;
+    transform: translateX(-50%);
+    margin-top: 20px;
+}
 
-
-
-
+li{
+    color: whitesmoke;
+    text-align: center;
+    font-size: 24px;
+    font-family: 'Work Sans', sans-serif;
+    position: absolute;
+    top: calc(50% + 60px);
+    left: 50%;
+    transform: translateX(-50%);
+    margin-top: 20px;
+}
