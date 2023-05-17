@@ -1,14 +1,11 @@
-    <?php
+     <?php
     require_once('db-connection.php');
     ?>
     <?php
     session_start();
+    if (!($_SESSION['loggedIn']))
+        header('Location: login.php');
     require_once('header.php');
-    if($_SESSION['loggedIn'])
-      //allow
-  else
-      //redirect to the login page
-      header('Location: /login.php'); 
     ?>
     <!DOCTYPE html>
      <html lang="en">
